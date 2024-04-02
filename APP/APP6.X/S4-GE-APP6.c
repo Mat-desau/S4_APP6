@@ -290,6 +290,17 @@ int main(void) {
                 //                of the built-in division by N in the PIC32 DSP Library implementation
                 //                of the FFT algorithm (See DS51685E, p.118), else roundoff error 
                 //                decreases resolution of X[k] result.
+                for (n = 0; n < H_LEN; n++) 
+                {
+                    inFFT[n].re = (currentInBuffer[n + 512]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].im = 0;
+                }
+                for (; n < FFT_LEN; n++) 
+                {
+                    inFFT[n].re = (previousInBuffer[n]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].im = 0;
+                }
+                
 
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
 
