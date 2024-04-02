@@ -63,11 +63,12 @@
 #include "fftc.h"
 
 // MX3 LibPack include files
-#include "utils.h"
-#include "lcd.h"
-#include "swt.h"
-#include "btn.h"
-#include "ssd.h"
+#include "LibPack/utils.h"
+#include "LibPack/utils.h"
+#include "LibPack/lcd.h"
+#include "LibPack/swt.h"
+#include "LibPack/btn.h"
+#include "LibPack/ssd.h"
 
 // Window and FIR filter transfer functions, scaled by 2^H_QXY_RES_NBITS for fixed-point encoding
 #include "filterFIRcoeffs.h"

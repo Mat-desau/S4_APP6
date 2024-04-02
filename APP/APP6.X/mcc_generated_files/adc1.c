@@ -52,7 +52,7 @@
 #include "adc1.h"
 #include "../S4-GE-APP6.h"
 #include "../filterIIRcoeffs.h"
-#include "../utils.h" 
+#include "../LibPack/utils.h" 
 
 /**
   Section: Driver Interface

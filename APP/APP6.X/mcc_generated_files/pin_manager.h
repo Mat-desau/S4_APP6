@@ -56,6 +56,152 @@
 */
 /**
   @Summary
+    Sets the GPIO pin, RB5, high using LATBbits.LATB5.
+
+  @Description
+    Sets the GPIO pin, RB5, high using LATBbits.LATB5.
+
+  @Preconditions
+    The RB5 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB5 high (1)
+    IO_RB5_SetHigh();
+    </code>
+
+*/
+#define IO_RB5_SetHigh()          LATBbits.LATB5 = 1
+/**
+  @Summary
+    Sets the GPIO pin, RB5, low using LATBbits.LATB5.
+
+  @Description
+    Sets the GPIO pin, RB5, low using LATBbits.LATB5.
+
+  @Preconditions
+    The RB5 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RB5 low (0)
+    IO_RB5_SetLow();
+    </code>
+
+*/
+#define IO_RB5_SetLow()           LATBbits.LATB5 = 0
+/**
+  @Summary
+    Toggles the GPIO pin, RB5, using LATBbits.LATB5.
+
+  @Description
+    Toggles the GPIO pin, RB5, using LATBbits.LATB5.
+
+  @Preconditions
+    The RB5 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RB5
+    IO_RB5_Toggle();
+    </code>
+
+*/
+#define IO_RB5_Toggle()           LATBbits.LATB5 ^= 1
+/**
+  @Summary
+    Reads the value of the GPIO pin, RB5.
+
+  @Description
+    Reads the value of the GPIO pin, RB5.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RB5
+    postValue = IO_RB5_GetValue();
+    </code>
+
+*/
+#define IO_RB5_GetValue()         PORTBbits.RB5
+/**
+  @Summary
+    Configures the GPIO pin, RB5, as an input.
+
+  @Description
+    Configures the GPIO pin, RB5, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB5 as an input
+    IO_RB5_SetDigitalInput();
+    </code>
+
+*/
+#define IO_RB5_SetDigitalInput()  TRISBbits.TRISB5 = 1
+/**
+  @Summary
+    Configures the GPIO pin, RB5, as an output.
+
+  @Description
+    Configures the GPIO pin, RB5, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RB5 as an output
+    IO_RB5_SetDigitalOutput();
+    </code>
+
+*/
+#define IO_RB5_SetDigitalOutput() TRISBbits.TRISB5 = 0
+/**
+  @Summary
     Sets the GPIO pin, RB7, high using LATBbits.LATB7.
 
   @Description
@@ -200,6 +346,152 @@
 
 */
 #define channel_AN7_SetDigitalOutput() TRISBbits.TRISB7 = 0
+/**
+  @Summary
+    Sets the GPIO pin, RE9, high using LATEbits.LATE9.
+
+  @Description
+    Sets the GPIO pin, RE9, high using LATEbits.LATE9.
+
+  @Preconditions
+    The RE9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE9 high (1)
+    IO_RE9_SetHigh();
+    </code>
+
+*/
+#define IO_RE9_SetHigh()          LATEbits.LATE9 = 1
+/**
+  @Summary
+    Sets the GPIO pin, RE9, low using LATEbits.LATE9.
+
+  @Description
+    Sets the GPIO pin, RE9, low using LATEbits.LATE9.
+
+  @Preconditions
+    The RE9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Set RE9 low (0)
+    IO_RE9_SetLow();
+    </code>
+
+*/
+#define IO_RE9_SetLow()           LATEbits.LATE9 = 0
+/**
+  @Summary
+    Toggles the GPIO pin, RE9, using LATEbits.LATE9.
+
+  @Description
+    Toggles the GPIO pin, RE9, using LATEbits.LATE9.
+
+  @Preconditions
+    The RE9 must be set to an output.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Toggle RE9
+    IO_RE9_Toggle();
+    </code>
+
+*/
+#define IO_RE9_Toggle()           LATEbits.LATE9 ^= 1
+/**
+  @Summary
+    Reads the value of the GPIO pin, RE9.
+
+  @Description
+    Reads the value of the GPIO pin, RE9.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    uint16_t portValue;
+
+    // Read RE9
+    postValue = IO_RE9_GetValue();
+    </code>
+
+*/
+#define IO_RE9_GetValue()         PORTEbits.RE9
+/**
+  @Summary
+    Configures the GPIO pin, RE9, as an input.
+
+  @Description
+    Configures the GPIO pin, RE9, as an input.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE9 as an input
+    IO_RE9_SetDigitalInput();
+    </code>
+
+*/
+#define IO_RE9_SetDigitalInput()  TRISEbits.TRISE9 = 1
+/**
+  @Summary
+    Configures the GPIO pin, RE9, as an output.
+
+  @Description
+    Configures the GPIO pin, RE9, as an output.
+
+  @Preconditions
+    None.
+
+  @Returns
+    None.
+
+  @Param
+    None.
+
+  @Example
+    <code>
+    // Sets the RE9 as an output
+    IO_RE9_SetDigitalOutput();
+    </code>
+
+*/
+#define IO_RE9_SetDigitalOutput() TRISEbits.TRISE9 = 0
 /**
   @Summary
     Sets the GPIO pin, RG7, high using LATGbits.LATG7.
