@@ -304,13 +304,31 @@ int main(void) {
 
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
 
+                mips_fft32(outFFT, inFFT, fftc, Scratch, log2N);
+                calc_power_spectrum(inFFT, debugBuffer1, FFT_LEN);
+                
                 // *** POINT B2: FIR Filtering, calculate Y* = (HX)*, where "*" is the complex conjugate
                 // (instead of Y=HX, in preparation for inverse FFT using forward FFT library function call)
 
+                for (n = 0; n < FFT_LEN ; n++) 
+                {
+                    inFFT[n].re = outFFT[n].re*Htot[n].re - outFFT[n].im*Htot[n].im;
+                    inFFT[n].im = -1 * (outFFT[n].re*Htot[n].im + outFFT[n].im*Htot[n].re);
+                }
+                
                 // *** POINT B3: Inverse FFT by forward FFT library function call, no need to divide by N
-
+                calc_power_spectrum(inFFT, debugBuffer1, FFT_LEN);
+                mips_fft32(outFFT, inFFT, fftc, Scratch, log2N);
+                
+                
                 // *** POINT B4: Extract real part of the inverse FFT result and remove H QX.Y scaling,
 				// discard first block as per the "Overlap-and-save" method.
+                
+                for (n = 0; n < SIG_LEN; n++) 
+                {
+                    previousOutBuffer[n] = outFFT[n+256].re;
+                    //previousOutBuffer[n].im = outFFT[n+256].im;
+                }
 
                 // If required, update LCD display with SW7-SW3 switch states
                 if (switchStateChange) {
