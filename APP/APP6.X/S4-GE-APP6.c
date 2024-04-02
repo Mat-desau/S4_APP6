@@ -63,12 +63,11 @@
 #include "fftc.h"
 
 // MX3 LibPack include files
-#include "LibPack/utils.h"
-#include "LibPack/utils.h"
-#include "LibPack/lcd.h"
-#include "LibPack/swt.h"
-#include "LibPack/btn.h"
-#include "LibPack/ssd.h"
+#include "utils.h"
+#include "lcd.h"
+#include "swt.h"
+#include "btn.h"
+#include "ssd.h"
 
 // Window and FIR filter transfer functions, scaled by 2^H_QXY_RES_NBITS for fixed-point encoding
 #include "filterFIRcoeffs.h"
@@ -122,7 +121,8 @@ int main(void) {
     Fe = PeripheralClockFrequency / PR3;
 
     // Calculate spectral resolution, use (double) type casting for parameters
-    // *** POINT A1: spectralResolution =...
+    // *** POINT A1:
+    spectralResolution = ((double)Fe) / ((double)FFT_LEN);
 
     // MX3 peripherals hardware initializations
     BTN_Init();
@@ -233,6 +233,7 @@ int main(void) {
                 }
                 
                 // *** POINT A2: calculate frequency spectrum components X[k] with PIC32 DSP Library FFT function call
+                mips_fft32(outFFT, inFFT, fftc, Scratch, log2N);
 
                 // Calculate power spectrum
                 calc_power_spectrum(outFFT, debugBuffer1, FFT_LEN);
@@ -247,7 +248,8 @@ int main(void) {
                 }
                 
                 // Calculate value in Hz of frequency with highest power 
-                // *** POINT A4: maxAmplFreq = ...
+                // *** POINT A4:
+                maxAmplFreq = maxN * spectralResolution;
 
                 // Show frequency with highest power on 7 segment display, max-out at 4 digits (9999)
                 numberInto4DigitString(maxAmplFreq, freqDigits);
@@ -346,9 +348,14 @@ int main(void) {
 //
 
 void calc_power_spectrum(int32c *inbuf, int32_t *outbuf, int n) {
+    int k;
     double re, im;
 
-    // *** POINT A3: Complete the calc_power_spectrum() function
+    for (k = 0; k < n; k++) {
+        re = inbuf[k].re;
+        im = inbuf[k].im;
+        outbuf[k] = 10*log10(re*re + im*im + 1);
+    }
 }
 
 

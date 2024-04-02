@@ -76,7 +76,7 @@ unsigned char digits[4];
 **      This happens faster than the human eye can notice.
 **          
 */
-void __ISR(_TIMER_1_VECTOR, IPL7AUTO) Timer1ISR(void) 
+void __ISR(_TIMER_1_VECTOR, ipl7) Timer1ISR(void) 
 {  
     static unsigned char idxCurrDigit = 0;
     unsigned char currDigit, idx;

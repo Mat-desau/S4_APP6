@@ -52,7 +52,7 @@
 #include "adc1.h"
 #include "../S4-GE-APP6.h"
 #include "../filterIIRcoeffs.h"
-#include "../LibPack/utils.h" 
+#include "utils.h"
 
 /**
   Section: Driver Interface
@@ -60,8 +60,8 @@
 
 void ADC1_Initialize (void)
 {
-    // ASAM enabled; DONE disabled; CLRASAM disabled; FORM Signed Fractional 32-bit; SAMP disabled; SSRC TMR3; SIDL disabled; ON enabled; 
-   AD1CON1 = 0x8744;
+    // ASAM enabled; DONE disabled; CLRASAM disabled; FORM Signed Integer 32-bit; SAMP disabled; SSRC TMR3; SIDL disabled; ON enabled; 
+   AD1CON1 = 0x8544;
 
     // CSCNA enabled; ALTS disabled; BUFM disabled; SMPI 1; OFFCAL disabled; VCFG AVDD/AVSS; 
    AD1CON2 = 0x400;
@@ -69,10 +69,10 @@ void ADC1_Initialize (void)
     // SAMC 0; ADRC PBCLK; ADCS 3; 
    AD1CON3 = 0x3;
 
-    // CH0SA AN7; CH0SB AN0; CH0NB Vrefl; CH0NA Vrefl; 
-   AD1CHS = 0x70000;
+    // CH0SA AN17; CH0SB AN0; CH0NB Vrefl; CH0NA Vrefl; 
+   AD1CHS = 0x110000;
 
-    // CSSL26 disabled; CSSL25 disabled; CSSL28 disabled; CSSL27 disabled; CSSL22 disabled; CSSL21 disabled; CSSL24 disabled; CSSL9 disabled; CSSL23 disabled; CSSL20 disabled; CSSL0 disabled; CSSL8 disabled; CSSL7 enabled; CSSL6 disabled; CSSL5 disabled; CSSL4 disabled; CSSL3 disabled; CSSL29 disabled; CSSL2 disabled; CSSL1 disabled; CSSL15 disabled; CSSL14 disabled; CSSL17 enabled; CSSL16 disabled; CSSL11 disabled; CSSL10 disabled; CSSL13 disabled; CSSL12 disabled; CSSL30 disabled; CSSL19 disabled; CSSL18 disabled; 
+    // CSSL26 disabled; CSSL25 disabled; CSSL28 disabled; CSSL27 disabled; CSSL22 disabled; CSSL21 disabled; CSSL24 disabled; CSSL9 disabled; CSSL23 disabled; CSSL20 disabled; CSSL0 disabled; CSSL8 disabled; CSSL7 disabled; CSSL6 disabled; CSSL5 disabled; CSSL4 disabled; CSSL3 disabled; CSSL29 disabled; CSSL2 disabled; CSSL1 disabled; CSSL15 disabled; CSSL14 disabled; CSSL17 enabled; CSSL16 disabled; CSSL11 disabled; CSSL10 disabled; CSSL13 disabled; CSSL12 disabled; CSSL30 disabled; CSSL19 disabled; CSSL18 disabled; 
    AD1CSSL = 0x20000;
 
 
@@ -164,8 +164,7 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
     OC1_PWMPulseWidthSet(((currentOutBuffer[bufferCount] + ADC1_DYN_RANGE_HALF) * PR2_Global) >> ADC1_NBITS);
 
     // If end of buffers reached, flag the main while() loop to begin processing, reset sample counter, and pulse BIN2 (DEBUG)
-    if (++bufferCount >= SIG_LEN) 
-    {
+    if (++bufferCount >= SIG_LEN) {
         inputBufferFull = true;
         bufferCount = 0;
         BIN2(1);
@@ -176,6 +175,7 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
     // clear ADC interrupt flag
     IFS0CLR= 1 << _IFS0_AD1IF_POSITION;
 }
+
 
 /**
   End of File

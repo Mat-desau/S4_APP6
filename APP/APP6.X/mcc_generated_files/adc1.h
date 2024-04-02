@@ -78,9 +78,8 @@
  */
 typedef enum 
 {
-    ADC1_CHANNEL_AN7 =  0x7,
     ADC1_CHANNEL_AN17 =  0x11,
-    ADC1_MAX_CHANNEL_COUNT = 2
+    ADC1_MAX_CHANNEL_COUNT = 1
 } ADC1_CHANNEL;
 
 /**

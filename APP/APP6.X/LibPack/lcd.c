@@ -73,17 +73,13 @@ void LCD_Init()
 */
 void LCD_ConfigurePins()
 {
-	//tris_LCD_DATA |= msk_LCD_DATA;
-	lat_LCD_DISP_RW = 1;
-	lat_LCD_DISP_EN = 1;    
-
     // set control pins as digital outputs.
     tris_LCD_DISP_RS = 0;
     tris_LCD_DISP_RW = 0;
     tris_LCD_DISP_EN = 0;
     
     // disable analog (set pins as digital))
-    //ansel_LCD_DISP_RS = 0;
+    ansel_LCD_DISP_RS = 0;
     
     // default (IO) function for remapable pins
     rp_LCD_DISP_RS = 0;
@@ -91,11 +87,11 @@ void LCD_ConfigurePins()
     rp_LCD_DISP_EN = 0;
     
     // make data pins digital (disable analog)
-    /*ansel_LCD_DB2 = 0;
+    ansel_LCD_DB2 = 0;
     ansel_LCD_DB4 = 0;
     ansel_LCD_DB5 = 0;
     ansel_LCD_DB6 = 0;
-    ansel_LCD_DB7 = 0;*/
+    ansel_LCD_DB7 = 0;
 }
 
 /* ------------------------------------------------------------ */
@@ -118,65 +114,31 @@ void LCD_ConfigurePins()
 **      
 **          
 */
-
-
-void delay39us(unsigned t) //
-{
-    int16_t fpbthresh = 1872; // = SYS_CLK_BUS_PERIPHERAL_1 * 39e-6;
-    T4CON = 0x8000; /* Enable TMR1, Tpb, 1:1 */
-    while (t--) { /* t x 39us loop */
-        TMR4 = 0;
-        while (TMR4 < fpbthresh);
-    }
-    T4CON = 0;
-}
-
-void delay1us(unsigned t)
-{
-    int16_t fpbthresh = 240; // = SYS_CLK_BUS_PERIPHERAL_1 * 1e-6;
-    T4CON = 0x8000; /* Enable TMR1, Tpb, 1:1 */
-    while (t--) { /* t x 39us loop */
-        TMR4 = 0;
-        while (TMR4 < fpbthresh);
-    }
-    T4CON = 0;
-}
-
-
-
 void LCD_WriteByte(unsigned char bData)
 {
+    DelayAprox10Us(5);  
 	// Configure IO Port data pins as output.
-	lat_LCD_DISP_RW = 0;
-    unsigned char *pLCDData = (unsigned char *)(0xBF886430);
-    *pLCDData = bData;
-    tris_LCD_DATA &= ~msk_LCD_DATA;
-    delay1us(1);
+   tris_LCD_DATA &= ~msk_LCD_DATA;
+    DelayAprox10Us(5);  
 	// clear RW
+	lat_LCD_DISP_RW = 0;
 
     // access data as contiguous 8 bits, using pointer to the LSB byte of LATE register
-    
-    //delay1us(1);
+    unsigned char *pLCDData = (unsigned char *)(0xBF886430);
+    *pLCDData = bData;
+
+    DelayAprox10Us(10);   
 
 	// Set En
 	lat_LCD_DISP_EN = 1;    
 
-    delay1us(1);
+    DelayAprox10Us(5);
 	// Clear En
 	lat_LCD_DISP_EN = 0;
 
-    
-    delay1us(1);
-	tris_LCD_DATA |= msk_LCD_DATA;
+    DelayAprox10Us(5);
+	// Set RW
 	lat_LCD_DISP_RW = 1;
-// Set RW
- 	delay1us(1);
-    //lat_LCD_DISP_EN = 1;
-    /*delay1us(1);
-    lat_LCD_DISP_EN = 0;*/
-    delay1us(1);
-    while(LCD_ReadStatus() & mskBStatus );
-
 }
 
 /* ------------------------------------------------------------ */
@@ -204,13 +166,18 @@ unsigned char LCD_ReadByte()
     tris_LCD_DATA |= msk_LCD_DATA;
 	// Set RW
 	lat_LCD_DISP_RW = 1;
-    delay1us(1);
+
+	// set RW
+	lat_LCD_DISP_RW = 1;    
+    
+	// Set En
+	lat_LCD_DISP_EN = 1;
+
+    DelayAprox10Us(50);   
 
     // Clear En
-	lat_LCD_DISP_EN = 1;
-    delay1us(1);
-  	bData = (unsigned char)(prt_LCD_DATA & (unsigned int)msk_LCD_DATA);
 	lat_LCD_DISP_EN = 0;
+  	bData = (unsigned char)(prt_LCD_DATA & (unsigned int)msk_LCD_DATA);
 	return bData;
 }
 
@@ -314,32 +281,28 @@ void LCD_WriteDataByte(unsigned char bData)
 */
 void LCD_InitSequence(unsigned char bDisplaySetOptions)
 {
-
-    IFS0bits.T4IF = 0;                  //    clear interrupt flag
-    IEC0bits.T4IE = 0;                  //    enable interrupt 
-
 	//	wait 40 ms
 
-	delay39us(1025);
+	DelayAprox10Us(40000);
 	// Function Set
 	LCD_WriteCommand(cmdLcdFcnInit);
 	// Wait ~100 us
-	//delay39us(10);
+	DelayAprox10Us(10);
 	// Function Set
-	LCD_WriteCommand(cmdLcdCtlInit);
+	LCD_WriteCommand(cmdLcdFcnInit);
 	// Wait ~100 us
-	//delay39us(10);
-//	LCD_DisplaySet(bDisplaySetOptions);
+	DelayAprox10Us(10);	// Display Set
+	LCD_DisplaySet(bDisplaySetOptions);
 	// Wait ~100 us
-	//delay39us(2);
+	DelayAprox10Us(10);
 	// Display Clear
 	LCD_DisplayClear();
 	// Wait 1.52 ms
-	//delay39us(40);
+	DelayAprox10Us(160);
     // Entry mode set
 	LCD_WriteCommand(cmdLcdEntryMode);
     	// Wait 1.52 ms
-	//delay39us(40);
+	DelayAprox10Us(160);
 }
 
 /* ------------------------------------------------------------ */
@@ -385,7 +348,6 @@ void LCD_DisplaySet(unsigned char bDisplaySetOptions)
 void LCD_DisplayClear()
 {
 	LCD_WriteCommand(cmdLcdClear);
-    delay39us(40);
 }
 
 /* ------------------------------------------------------------ */
@@ -404,7 +366,6 @@ void LCD_DisplayClear()
 void LCD_ReturnHome()
 {
 	LCD_WriteCommand(cmdLcdRetHome);
-    //delay39us(40);
 }
 
 /* ------------------------------------------------------------ */
@@ -479,23 +440,20 @@ void LCD_WriteStringAtPos(char *szLn, unsigned char idxLine, unsigned char idxPo
 {
 	// crop string to 0x27 chars
 	int len = strlen(szLn);
-	if(len > 16)
+	if(len > 0x27)
 	{
-        szLn[16] = 0; // trim the string so it contains 32 characters 
-		len = 16;
+        szLn[0x27] = 0; // trim the string so it contains 40 characters 
+		len = 0x27;
 	}
 
 	// Set write position
 	unsigned char bAddrOffset = (idxLine == 0 ? 0: 0x40) + idxPos;
 	LCD_SetWriteDdramPosition(bAddrOffset);
-    delay39us(4);
 
 	unsigned char bIdx = 0;
 	while(bIdx < len)
 	{
 		LCD_WriteDataByte(szLn[bIdx]);
-        delay39us(2);
-        //DelayAprox10Us(10);
 		bIdx++;
 	}
 }
@@ -521,13 +479,6 @@ void LCD_SetWriteCgramPosition(unsigned char bAdr)
 	unsigned char bCmd = cmdLcdSetCgramPos | bAdr;
 	LCD_WriteCommand(bCmd);
 }
-
-
-void LCD_SetWriteDdramPosition(unsigned char bAddr)
-{
-	LCD_WriteCommand(cmdLcdSetDdramPos | bAddr);
-}
-
 
 /* ------------------------------------------------------------ */
 /***	LCD_WriteBytesAtPosCgram
@@ -562,107 +513,6 @@ void LCD_WriteBytesAtPosCgram(unsigned char *pBytes, unsigned char len, unsigned
 		idx++;
 	}
 }
-
-
-
-/*****************************************************************************
- * Fonction S4 APP3e
- * Auteur Jp Gouin
- * H2022
- * 
- * 
- *****************************************************************************/
-
-void int2char(int value, char * text, int nbDigit, int erase) {
-    if (value + abs(value) == 0 && value != 0) {
-        text[0] = '-';
-    }
-    else {
-        text[0] = ' ';
-    }
-    value = abs(value);
-    
-    int i;
-    int div = 10;
-    
-    // pour les unit�es
-    text[nbDigit-i-1] = (char) (value % div) + '0'; // extrait le digit
-    value = value / 10;   // divise par 10 et arrondie a la baisse.
-    
-    // pour les autres digits
-    for (i=1; i<nbDigit-1; i++) {
-        if (value == 0 && erase == 1){
-                text[nbDigit-i-1] = ' ';
-        }
-        else {
-            text[nbDigit-i-1] = (char) (value % div) + '0'; // extrait le digit
-        }
-        value = value / 10;   // divise par 10 et arrondie a la baisse.
-    }
-}
-
-/* ------------------------------------------------------------ */
-/***	LCD_WriteIntAtPos
-**
-**  Synopsis:
-**      LCD_WriteIntAtPos(20, 6, 0, 0, 1);
-**
-**	Parameters:
-**      int value	- integer to be written to LCD
-**      int nbDigit	- number of digit (string length) to be written to LCD (including the sign + or -)
-**		int idxLine	- line where the string will be displayed
-**          0 - first line of LCD
-**          1 - second line of LCD
-**		unsigned char idxPos - the starting position of the string within the line. 
-**                                  The value must be between:
-**                                      0 - first position from left
-**                                      39 - last position for DDRAM for one line
-**		int erase	- efface les caratères zéros devant le nombre                                  
-**
-**	Return Value:
-**		
-**	Description:
-**		Displays the specified integer at the specified position on the specified line. 
-**		It sets the corresponding write position and then writes data bytes when the device is ready.
-**      Strings longer than 40 characters are trimmed. 
-**      It is possible that not all the characters will be visualized, as the display only visualizes 16 characters for one line.
-**      
-**          
-*/
-
-void LCD_WriteIntAtPos(int value, int nbDigit, unsigned char idxLine, unsigned char idxPos, int erase) {
-    // valeur  => ce qui sera affiché
-    // nbDigit => nombre de chiffre à afficher
-    // erase   => permet d'effacer les zéros devant le nombre
-    
-    char text[nbDigit];
-    int2char(value, text, nbDigit, erase);
-    
-	if(nbDigit > 16) {
-        text[16] = 0; // trim the string so it contains 32 characters 
-		nbDigit = 16;
-	}
-
-	// Set write position
-	unsigned char bAddrOffset = (idxLine == 0 ? 0: 0x40) + idxPos;
-	LCD_SetWriteDdramPosition(bAddrOffset);
-    delay39us(4);
-
-	unsigned char bIdx = 0;
-	while(bIdx < nbDigit) {
-		LCD_WriteDataByte(text[bIdx]);
-        delay39us(2);
-        //DelayAprox10Us(10);
-		bIdx++;
-	}
-}
-
-void LCD_CLEAR() {
-    char vide[] = "                 ";
-    LCD_WriteStringAtPos(vide, 0, 0);  // effacer LCD ligne du haut
-    LCD_WriteStringAtPos(vide, 1, 0);  // effacer LCD ligne du bas
-}
-
 
 /* *****************************************************************************
  End of File

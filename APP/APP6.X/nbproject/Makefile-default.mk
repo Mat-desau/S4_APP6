@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/adc1.c mcc_generated_files/oc1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr3.c S4-GE-APP6.c LibPack/led.c LibPack/swt.c LibPack/btn.c LibPack/utils.c LibPack/ssd.c LibPack/lcd.c
+SOURCEFILES_QUOTED_IF_SPACED=LibPack/btn.c LibPack/lcd.c LibPack/ssd.c LibPack/swt.c LibPack/utils.c mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/adc1.c mcc_generated_files/oc1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr3.c S4-GE-APP6.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/oc1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr3.o ${OBJECTDIR}/S4-GE-APP6.o ${OBJECTDIR}/LibPack/led.o ${OBJECTDIR}/LibPack/swt.o ${OBJECTDIR}/LibPack/btn.o ${OBJECTDIR}/LibPack/utils.o ${OBJECTDIR}/LibPack/ssd.o ${OBJECTDIR}/LibPack/lcd.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/adc1.o.d ${OBJECTDIR}/mcc_generated_files/oc1.o.d ${OBJECTDIR}/mcc_generated_files/tmr2.o.d ${OBJECTDIR}/mcc_generated_files/tmr3.o.d ${OBJECTDIR}/S4-GE-APP6.o.d ${OBJECTDIR}/LibPack/led.o.d ${OBJECTDIR}/LibPack/swt.o.d ${OBJECTDIR}/LibPack/btn.o.d ${OBJECTDIR}/LibPack/utils.o.d ${OBJECTDIR}/LibPack/ssd.o.d ${OBJECTDIR}/LibPack/lcd.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/LibPack/btn.o ${OBJECTDIR}/LibPack/lcd.o ${OBJECTDIR}/LibPack/ssd.o ${OBJECTDIR}/LibPack/swt.o ${OBJECTDIR}/LibPack/utils.o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/oc1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr3.o ${OBJECTDIR}/S4-GE-APP6.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/LibPack/btn.o.d ${OBJECTDIR}/LibPack/lcd.o.d ${OBJECTDIR}/LibPack/ssd.o.d ${OBJECTDIR}/LibPack/swt.o.d ${OBJECTDIR}/LibPack/utils.o.d ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d ${OBJECTDIR}/mcc_generated_files/mcc.o.d ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d ${OBJECTDIR}/mcc_generated_files/adc1.o.d ${OBJECTDIR}/mcc_generated_files/oc1.o.d ${OBJECTDIR}/mcc_generated_files/tmr2.o.d ${OBJECTDIR}/mcc_generated_files/tmr3.o.d ${OBJECTDIR}/S4-GE-APP6.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/oc1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr3.o ${OBJECTDIR}/S4-GE-APP6.o ${OBJECTDIR}/LibPack/led.o ${OBJECTDIR}/LibPack/swt.o ${OBJECTDIR}/LibPack/btn.o ${OBJECTDIR}/LibPack/utils.o ${OBJECTDIR}/LibPack/ssd.o ${OBJECTDIR}/LibPack/lcd.o
+OBJECTFILES=${OBJECTDIR}/LibPack/btn.o ${OBJECTDIR}/LibPack/lcd.o ${OBJECTDIR}/LibPack/ssd.o ${OBJECTDIR}/LibPack/swt.o ${OBJECTDIR}/LibPack/utils.o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o ${OBJECTDIR}/mcc_generated_files/mcc.o ${OBJECTDIR}/mcc_generated_files/pin_manager.o ${OBJECTDIR}/mcc_generated_files/adc1.o ${OBJECTDIR}/mcc_generated_files/oc1.o ${OBJECTDIR}/mcc_generated_files/tmr2.o ${OBJECTDIR}/mcc_generated_files/tmr3.o ${OBJECTDIR}/S4-GE-APP6.o
 
 # Source Files
-SOURCEFILES=mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/adc1.c mcc_generated_files/oc1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr3.c S4-GE-APP6.c LibPack/led.c LibPack/swt.c LibPack/btn.c LibPack/utils.c LibPack/ssd.c LibPack/lcd.c
+SOURCEFILES=LibPack/btn.c LibPack/lcd.c LibPack/ssd.c LibPack/swt.c LibPack/utils.c mcc_generated_files/interrupt_manager.c mcc_generated_files/mcc.c mcc_generated_files/pin_manager.c mcc_generated_files/adc1.c mcc_generated_files/oc1.c mcc_generated_files/tmr2.c mcc_generated_files/tmr3.c S4-GE-APP6.c
 
 
 
@@ -107,174 +107,162 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/mcc_generated_files/interrupt_manager.o: mcc_generated_files/interrupt_manager.c  .generated_files/flags/default/faa3f5336a2f5cfd0051407e75f488757485a259 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o mcc_generated_files/interrupt_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/mcc.o: mcc_generated_files/mcc.c  .generated_files/flags/default/807b0148bcc377c2a80fc17d22f30f25c7363356 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/mcc.o.d" -o ${OBJECTDIR}/mcc_generated_files/mcc.o mcc_generated_files/mcc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/pin_manager.o: mcc_generated_files/pin_manager.c  .generated_files/flags/default/ccd7fe3d2c00485b80090e5f8b33ec7e0598bdca .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/pin_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/pin_manager.o mcc_generated_files/pin_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/adc1.o: mcc_generated_files/adc1.c  .generated_files/flags/default/31f75600727c8f4cac82d39c585c9ed547df1ddf .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/adc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/adc1.o mcc_generated_files/adc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/oc1.o: mcc_generated_files/oc1.c  .generated_files/flags/default/71e790b634bce0ae3262aab3d954e1cf4bdf5adc .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/oc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/oc1.o mcc_generated_files/oc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/tmr2.o: mcc_generated_files/tmr2.c  .generated_files/flags/default/b3d8f08d7390c74f744246d20f0e89aee1a317eb .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr2.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr2.o mcc_generated_files/tmr2.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/tmr3.o: mcc_generated_files/tmr3.c  .generated_files/flags/default/46c37cc7ca0fbdf28877776bcf5729b3a5e3ca70 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr3.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr3.o mcc_generated_files/tmr3.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/S4-GE-APP6.o: S4-GE-APP6.c  .generated_files/flags/default/a5c509d61e1586c537f741e42f287521824ece25 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/S4-GE-APP6.o.d 
-	@${RM} ${OBJECTDIR}/S4-GE-APP6.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/S4-GE-APP6.o.d" -o ${OBJECTDIR}/S4-GE-APP6.o S4-GE-APP6.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/led.o: LibPack/led.c  .generated_files/flags/default/458649771042da364b80222e6068c57ce926e616 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/led.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/led.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/led.o.d" -o ${OBJECTDIR}/LibPack/led.o LibPack/led.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/swt.o: LibPack/swt.c  .generated_files/flags/default/ae15d37e1fc025c3361cd99eff3a3437c0169d86 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/swt.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/swt.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/swt.o.d" -o ${OBJECTDIR}/LibPack/swt.o LibPack/swt.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/btn.o: LibPack/btn.c  .generated_files/flags/default/64f5fa275cdbf903aacce0ccc422e44e797c0140 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+${OBJECTDIR}/LibPack/btn.o: LibPack/btn.c  .generated_files/flags/default/e3117fa92a0909c716456dacaabbd4c999556504 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
 	@${MKDIR} "${OBJECTDIR}/LibPack" 
 	@${RM} ${OBJECTDIR}/LibPack/btn.o.d 
 	@${RM} ${OBJECTDIR}/LibPack/btn.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/btn.o.d" -o ${OBJECTDIR}/LibPack/btn.o LibPack/btn.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/btn.o.d" -o ${OBJECTDIR}/LibPack/btn.o LibPack/btn.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/LibPack/utils.o: LibPack/utils.c  .generated_files/flags/default/c3d0da0080d526c0e9c80b41e06f65fd02c7a398 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/utils.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/utils.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/utils.o.d" -o ${OBJECTDIR}/LibPack/utils.o LibPack/utils.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/ssd.o: LibPack/ssd.c  .generated_files/flags/default/fb08db6e82db252278bc5217157f6e4508653f7d .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/ssd.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/ssd.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/ssd.o.d" -o ${OBJECTDIR}/LibPack/ssd.o LibPack/ssd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/lcd.o: LibPack/lcd.c  .generated_files/flags/default/3e770d43a6264389a06bf94a1fd37dc122324813 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+${OBJECTDIR}/LibPack/lcd.o: LibPack/lcd.c  .generated_files/flags/default/98cc949cdc10807039671af4388b595810d46db4 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
 	@${MKDIR} "${OBJECTDIR}/LibPack" 
 	@${RM} ${OBJECTDIR}/LibPack/lcd.o.d 
 	@${RM} ${OBJECTDIR}/LibPack/lcd.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/lcd.o.d" -o ${OBJECTDIR}/LibPack/lcd.o LibPack/lcd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/lcd.o.d" -o ${OBJECTDIR}/LibPack/lcd.o LibPack/lcd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/LibPack/ssd.o: LibPack/ssd.c  .generated_files/flags/default/4e2996090dd89ac48ce377b8ea496a5084490e4f .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/LibPack" 
+	@${RM} ${OBJECTDIR}/LibPack/ssd.o.d 
+	@${RM} ${OBJECTDIR}/LibPack/ssd.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/ssd.o.d" -o ${OBJECTDIR}/LibPack/ssd.o LibPack/ssd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/LibPack/swt.o: LibPack/swt.c  .generated_files/flags/default/f46fda05ca80f29160dc2edf87f1b7d78067914f .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/LibPack" 
+	@${RM} ${OBJECTDIR}/LibPack/swt.o.d 
+	@${RM} ${OBJECTDIR}/LibPack/swt.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/swt.o.d" -o ${OBJECTDIR}/LibPack/swt.o LibPack/swt.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/LibPack/utils.o: LibPack/utils.c  .generated_files/flags/default/80d2800731319ae1b11e009abe6f093c5347b260 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/LibPack" 
+	@${RM} ${OBJECTDIR}/LibPack/utils.o.d 
+	@${RM} ${OBJECTDIR}/LibPack/utils.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/utils.o.d" -o ${OBJECTDIR}/LibPack/utils.o LibPack/utils.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/interrupt_manager.o: mcc_generated_files/interrupt_manager.c  .generated_files/flags/default/8b0082b48cddfb30a5b34c7c826a163113a0e588 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o mcc_generated_files/interrupt_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/mcc.o: mcc_generated_files/mcc.c  .generated_files/flags/default/dd0536823e6d209770df69cb330ea3e8f2d3c7fd .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/mcc.o.d" -o ${OBJECTDIR}/mcc_generated_files/mcc.o mcc_generated_files/mcc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/pin_manager.o: mcc_generated_files/pin_manager.c  .generated_files/flags/default/8ca99138ae916e0ad4b1286463a337ed57160c3e .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/pin_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/pin_manager.o mcc_generated_files/pin_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/adc1.o: mcc_generated_files/adc1.c  .generated_files/flags/default/85783a10e2339cec739a58b17ac65510515e7929 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/adc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/adc1.o mcc_generated_files/adc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/oc1.o: mcc_generated_files/oc1.c  .generated_files/flags/default/8690792c1310a41ec048177f644a75bcf53e85ce .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/oc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/oc1.o mcc_generated_files/oc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/tmr2.o: mcc_generated_files/tmr2.c  .generated_files/flags/default/b4ce16a8d7a424af2a417924c2a49ef1eef1512e .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr2.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr2.o mcc_generated_files/tmr2.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/tmr3.o: mcc_generated_files/tmr3.c  .generated_files/flags/default/a31c6cf58eadef7f3ec0012c56f9a90a5d2f82e1 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr3.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr3.o mcc_generated_files/tmr3.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/S4-GE-APP6.o: S4-GE-APP6.c  .generated_files/flags/default/ca0a847a181f80f59f8a95edbd75f90f6d76c7f1 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/S4-GE-APP6.o.d 
+	@${RM} ${OBJECTDIR}/S4-GE-APP6.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1  -fframe-base-loclist  -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/S4-GE-APP6.o.d" -o ${OBJECTDIR}/S4-GE-APP6.o S4-GE-APP6.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 else
-${OBJECTDIR}/mcc_generated_files/interrupt_manager.o: mcc_generated_files/interrupt_manager.c  .generated_files/flags/default/c5210bf5bbf248bd266bb973d3b8622933f6ea41 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o mcc_generated_files/interrupt_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/mcc.o: mcc_generated_files/mcc.c  .generated_files/flags/default/bd59cd296a5bce7b0f08062ccdfcbcee3f76919e .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/mcc.o.d" -o ${OBJECTDIR}/mcc_generated_files/mcc.o mcc_generated_files/mcc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/pin_manager.o: mcc_generated_files/pin_manager.c  .generated_files/flags/default/736fbbe5921c1565381cf90cec66f7ff77533972 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/pin_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/pin_manager.o mcc_generated_files/pin_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/adc1.o: mcc_generated_files/adc1.c  .generated_files/flags/default/35f1c456bc97d525e06f3eca3a6b77b5a2bf2306 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/adc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/adc1.o mcc_generated_files/adc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/oc1.o: mcc_generated_files/oc1.c  .generated_files/flags/default/a1fd46d91f819f198c3484faad7f69f662ab82c0 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/oc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/oc1.o mcc_generated_files/oc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/tmr2.o: mcc_generated_files/tmr2.c  .generated_files/flags/default/2983630d3d76e9770c9c1f41df515649c5c072c4 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr2.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr2.o mcc_generated_files/tmr2.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/mcc_generated_files/tmr3.o: mcc_generated_files/tmr3.c  .generated_files/flags/default/97093d208d3b73013ff7609defa2a5be1ae0bbe .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o.d 
-	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr3.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr3.o mcc_generated_files/tmr3.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/S4-GE-APP6.o: S4-GE-APP6.c  .generated_files/flags/default/7b48921c3e739dbd872b42afd56491fa38006259 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/S4-GE-APP6.o.d 
-	@${RM} ${OBJECTDIR}/S4-GE-APP6.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/S4-GE-APP6.o.d" -o ${OBJECTDIR}/S4-GE-APP6.o S4-GE-APP6.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/led.o: LibPack/led.c  .generated_files/flags/default/11dae5e2bf65eed0572f330222cf31ff22ea4142 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/led.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/led.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/led.o.d" -o ${OBJECTDIR}/LibPack/led.o LibPack/led.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/swt.o: LibPack/swt.c  .generated_files/flags/default/725c65d4cf9307bca16b26cee0aee5c144d772b9 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/swt.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/swt.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/swt.o.d" -o ${OBJECTDIR}/LibPack/swt.o LibPack/swt.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/btn.o: LibPack/btn.c  .generated_files/flags/default/f386661d153a39619cbceb227aa93c5ae48111bc .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+${OBJECTDIR}/LibPack/btn.o: LibPack/btn.c  .generated_files/flags/default/fa58fc12b1f46f4c9de4a7005588460a420e0f66 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
 	@${MKDIR} "${OBJECTDIR}/LibPack" 
 	@${RM} ${OBJECTDIR}/LibPack/btn.o.d 
 	@${RM} ${OBJECTDIR}/LibPack/btn.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/btn.o.d" -o ${OBJECTDIR}/LibPack/btn.o LibPack/btn.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/btn.o.d" -o ${OBJECTDIR}/LibPack/btn.o LibPack/btn.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
-${OBJECTDIR}/LibPack/utils.o: LibPack/utils.c  .generated_files/flags/default/846deaf41efc3b6c84530fdb7cf1914dcb8a2b62 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/utils.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/utils.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/utils.o.d" -o ${OBJECTDIR}/LibPack/utils.o LibPack/utils.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/ssd.o: LibPack/ssd.c  .generated_files/flags/default/3cf70a66e1bf6dc8e51b281c70510b998dfcd70e .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
-	@${MKDIR} "${OBJECTDIR}/LibPack" 
-	@${RM} ${OBJECTDIR}/LibPack/ssd.o.d 
-	@${RM} ${OBJECTDIR}/LibPack/ssd.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/ssd.o.d" -o ${OBJECTDIR}/LibPack/ssd.o LibPack/ssd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
-	
-${OBJECTDIR}/LibPack/lcd.o: LibPack/lcd.c  .generated_files/flags/default/55825c1947aeec2c044c72c30680c966bb220c4d .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+${OBJECTDIR}/LibPack/lcd.o: LibPack/lcd.c  .generated_files/flags/default/83a4259f7c114060c193a2b58f9fef179f9c7677 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
 	@${MKDIR} "${OBJECTDIR}/LibPack" 
 	@${RM} ${OBJECTDIR}/LibPack/lcd.o.d 
 	@${RM} ${OBJECTDIR}/LibPack/lcd.o 
-	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LibPack/lcd.o.d" -o ${OBJECTDIR}/LibPack/lcd.o LibPack/lcd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/lcd.o.d" -o ${OBJECTDIR}/LibPack/lcd.o LibPack/lcd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/LibPack/ssd.o: LibPack/ssd.c  .generated_files/flags/default/a746cf0c57e0ffcfbf3c48da2e121358f805644e .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/LibPack" 
+	@${RM} ${OBJECTDIR}/LibPack/ssd.o.d 
+	@${RM} ${OBJECTDIR}/LibPack/ssd.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/ssd.o.d" -o ${OBJECTDIR}/LibPack/ssd.o LibPack/ssd.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/LibPack/swt.o: LibPack/swt.c  .generated_files/flags/default/548dec4573e7f9d750d62a960293d2090ee7dfbc .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/LibPack" 
+	@${RM} ${OBJECTDIR}/LibPack/swt.o.d 
+	@${RM} ${OBJECTDIR}/LibPack/swt.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/swt.o.d" -o ${OBJECTDIR}/LibPack/swt.o LibPack/swt.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/LibPack/utils.o: LibPack/utils.c  .generated_files/flags/default/ba2484ee1a07dc68b4504c28324c314734b208cf .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/LibPack" 
+	@${RM} ${OBJECTDIR}/LibPack/utils.o.d 
+	@${RM} ${OBJECTDIR}/LibPack/utils.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/LibPack/utils.o.d" -o ${OBJECTDIR}/LibPack/utils.o LibPack/utils.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/interrupt_manager.o: mcc_generated_files/interrupt_manager.c  .generated_files/flags/default/c18d60db3993973cd5af75a5829ad8123c636682 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/interrupt_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/interrupt_manager.o mcc_generated_files/interrupt_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/mcc.o: mcc_generated_files/mcc.c  .generated_files/flags/default/98906f9b58f45ad7cfac88fd8bb1bf4d3db356ad .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/mcc.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/mcc.o.d" -o ${OBJECTDIR}/mcc_generated_files/mcc.o mcc_generated_files/mcc.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/pin_manager.o: mcc_generated_files/pin_manager.c  .generated_files/flags/default/63af76b7d368b87a5c106f3ef57b340a8172de36 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/pin_manager.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/pin_manager.o.d" -o ${OBJECTDIR}/mcc_generated_files/pin_manager.o mcc_generated_files/pin_manager.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/adc1.o: mcc_generated_files/adc1.c  .generated_files/flags/default/fa4a118fd42a3ad4de6284ba5f89ffaa7c307b4c .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/adc1.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/adc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/adc1.o mcc_generated_files/adc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/oc1.o: mcc_generated_files/oc1.c  .generated_files/flags/default/1fa6f9c53b472c5b5bf6184c08ddaebf1c8f5ae2 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/oc1.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/oc1.o.d" -o ${OBJECTDIR}/mcc_generated_files/oc1.o mcc_generated_files/oc1.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/tmr2.o: mcc_generated_files/tmr2.c  .generated_files/flags/default/68660b5d3c1fc0a31704154dc6473314d1fe90f5 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr2.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr2.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr2.o mcc_generated_files/tmr2.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/mcc_generated_files/tmr3.o: mcc_generated_files/tmr3.c  .generated_files/flags/default/d6dd3768ee89c0966cd2444c9e820770bbd0c5d8 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}/mcc_generated_files" 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o.d 
+	@${RM} ${OBJECTDIR}/mcc_generated_files/tmr3.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/mcc_generated_files/tmr3.o.d" -o ${OBJECTDIR}/mcc_generated_files/tmr3.o mcc_generated_files/tmr3.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
+	
+${OBJECTDIR}/S4-GE-APP6.o: S4-GE-APP6.c  .generated_files/flags/default/6e6fa03cef624adbd0f28ac2cc3a3ba9c95014f0 .generated_files/flags/default/60b5199efda4ab7dde2ee3b07785d0c76011075a
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/S4-GE-APP6.o.d 
+	@${RM} ${OBJECTDIR}/S4-GE-APP6.o 
+	${MP_CC}  $(MP_EXTRA_CC_PRE)  -g -x c -c -mprocessor=$(MP_PROCESSOR_OPTION) -I"LibPack" -I"." -MP -MMD -MF "${OBJECTDIR}/S4-GE-APP6.o.d" -o ${OBJECTDIR}/S4-GE-APP6.o S4-GE-APP6.c    -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -mdfp="${DFP_DIR}"  
 	
 endif
 
