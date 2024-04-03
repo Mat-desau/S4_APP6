@@ -132,17 +132,21 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
     // If IIR filtering is enabled, real-time calculation of the next output sample
     if (IIREnabled) {
         y = x;
-         for (nSOS = 0; nSOS < N_SOS_SECTIONS; nSOS++) {
+         for (nSOS = 0; nSOS < N_SOS_SECTIONS; nSOS++) 
+         {
             // *** POINT C1
-            
-			// y[n] = 
+             
+            //(b0, b1, b2, a0, a1, a2)
+            //IIRu[N_SOS_SECTIONS] = {0}, IIRv[N_SOS_SECTIONS] = {0}
+             
+			y = ((IIRCoeffs[nSOS][0])*(x)) + (IIRv[nSOS]);
 			
-			// v[n] = 
+			IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) + ((IIRCoeffs[nSOS][4])*(y)) + (IIRu[nSOS]);
 			
-			// u[n] = 
+			IIRu[nSOS] = ((IIRCoeffs[nSOS][2])*(x)) + ((IIRCoeffs[nSOS][5])*(y));
             
             // Update the input for the next SOS section
-            x = y;
+            x = y / 8192;
         }
 
         // Copy the resulting filtered sample to the current output buffer

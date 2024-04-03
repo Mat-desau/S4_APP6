@@ -176,7 +176,10 @@ int main(void) {
             // at least two (three in this case) buffers are acquired sequentially without interruption
             // as required for the Overlap & Save method to work properly (no glitches)
             if (++niters == 4)
+                //IIR = SWO et SW1
+                //Filtres H3 a H7 = SW0 SW1 SW2 et ceux à avoir
                 niters = 0; // (DEBUG C) 
+                //
 
             // Read switch states: if any switch has changed state, raise switchStateChangeflag
             switchStateChange = switchStateChanged(&SW7StateChange, &SW6StateChange, &SW5StateChange,

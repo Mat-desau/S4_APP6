@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
-from zplane import zplane
 
 def CalculFiltre(fe: float):
     """
@@ -112,8 +111,9 @@ def main():
                     fd.write(f"{int(np.round(OUT[a][b]))}")
                     if(b < 5):
                         fd.write(",")
-                fd.write("}\n")
+                fd.write("},\n")
             fd.write("};\n")
+            fd.write("int32_t IIRu[N_SOS_SECTIONS] = {0}, IIRv[N_SOS_SECTIONS] = {0};\n")
 
     print('We made it here')
 
