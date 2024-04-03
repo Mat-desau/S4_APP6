@@ -305,7 +305,7 @@ int main(void) {
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
 
                 mips_fft32(outFFT, inFFT, fftc, Scratch, log2N);
-                calc_power_spectrum(inFFT, debugBuffer1, FFT_LEN);
+                calc_power_spectrum(outFFT, debugBuffer1, FFT_LEN);
                 
                 // *** POINT B2: FIR Filtering, calculate Y* = (HX)*, where "*" is the complex conjugate
                 // (instead of Y=HX, in preparation for inverse FFT using forward FFT library function call)
@@ -317,7 +317,7 @@ int main(void) {
                 }
                 
                 // *** POINT B3: Inverse FFT by forward FFT library function call, no need to divide by N
-                calc_power_spectrum(inFFT, debugBuffer1, FFT_LEN);
+                calc_power_spectrum(inFFT, debugBuffer2, FFT_LEN);
                 mips_fft32(outFFT, inFFT, fftc, Scratch, log2N);
                 
                 

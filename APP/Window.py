@@ -22,7 +22,7 @@ def main():
     han = han * (2**13)
     han_int32 = han.astype(np.int32)
     print(han_int32)
-    
+
     #printtofile(han_int32)
 
 
