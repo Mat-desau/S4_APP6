@@ -1,83 +1,44 @@
-# Libraries requises
 from matplotlib import pyplot as plt, rcParams as mpl_rcParams
 import numpy as np
 from scipy import signal
-def calcul_des_filtres(n: int, fc: float, fe: float):
-    """
-    Réponses impulsionnelles et fonctions de transfert des filtres FIR et IIR
-    """
-    # Sinusoïde à 200 Hz, rallongée à longueur 2N par "zero‐padding"
-    f_sig: float = 200
-    x200: np.ndarray = np.sin(2 * np.pi * np.arange(n) * f_sig / fe)
-    x200_zero_pad: np.ndarray = np.append(x200, np.zeros(len(x200)))
-    plt.figure()
-    plt.plot(np.arange(len(x200_zero_pad)) / fe, x200_zero_pad)
-    plt.plot(np.arange(len(x200)) / fe, x200)
-    plt.title(f"Signal sinusoïdal à {f_sig} Hz doublé en longueur par zero‐padding")
-    plt.xlabel("Temps (s)")
-    plt.ylabel("Amplitude normalisée")
+
+def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
+    NombreEchantillons: int = 1024  # Nombre echantillon
+
     # Filtre FIR: réponse impulsionnelle d'ordre N‐1 à fréquence de coupure fc
-    fir_h: np.ndarray = signal.firwin(
-        numtaps=n, cutoff=fc, pass_zero="lowpass", window="hamming", fs=fe
-    )
+    fir_h: np.ndarray = signal.firwin(numtaps=n, cutoff=fc, pass_zero=type, window="blackman", fs=fe)
+    fir_h_dft_tf: np.ndarray = np.fft.fft(fir_h, n=1024)
+
     # Filtre FIR: fonctions de transfert harmoniques ("h_dft_*") calculées
     # par freqz() et explicitement par TF pour comparer. Dans l'appel de freqz()
     # pour un FIR, notez les bi qui sont les coefficients de la réponse
     # impulsionnelle et qu’il n’y a qu’un seul coefficient aj (a0 = 1),
     # ainsi que l'usage du paramètre worN pour augmenter la résolution du spectre.
-    fir_freq_fz, fir_h_dft_fz = signal.freqz(b=fir_h, a=1, worN=10000, fs=fe)
-    fir_h_dft_tf: np.ndarray = np.fft.fft(fir_h)
-    # Filtre IIR d’ordre 4: coefficients a & b de l'équation aux différences
-    # et calcul de sa réponse impulsionnelle tronquée (N premiers échantillons)
-    [b, a] = signal.butter(N=4, Wn=fc, btype="low", fs=fe, output="ba")
-    imp: np.ndarray = signal.unit_impulse(n)
-    iir_h: np.ndarray = signal.lfilter(b=b, a=a, x=imp)
-    # Filtre IIR: fonctions de transfert harmoniques ("h_dft_*") du filtre IIR
-    # par freqz() et explicitement par TF (h tronqué) pour comparer
-    freq_iir_fz, h_dft_iir_fz = signal.freqz(b=b, a=a, worN=10000, fs=fe)
-    h_dft_iir_tf: np.ndarray = np.fft.fft(iir_h)
-    # Graphiques des réponses impulsionnelles des filtres. Rremarquez que
-    # le filtre FIR est causal versus le filtre IIR qui est non‐causal et déphasé
-    plt.figure()
+    f_nn: np.ndarray = np.arange(0, fe / 2, fe / n)
+    fir_freq_fz, fir_h_dft_fz = signal.freqz(b=fir_h, a=1, worN=NombreEchantillons, fs=fe)
+
     plt.subplot(3, 1, 1)
     plt.plot(fir_h, label="FIR")
-    plt.plot(iir_h, label="IIR")
     plt.title("Réponses impulsionnelles des filtres")
     plt.xlabel("n")
     plt.ylabel("Amplitude normalisée")
     plt.legend()
 
-    # Graphiques des fonctions de transfert harmoniques du filtre FIR (freqz & TF).
-    # Dans le cas de la TF, afin d'extraire les valeurs du spectre aux fréquences
-    # non‐négatives seulement, remarquez l'usage de la division avec
-    # troncature "//" pour générer un nombre entier tel que requis pour des
-    # indices de tableaux (une simple division avec "/" aurait causé une erreur).
-    # Notez aussi la résolution accrue avec freqz() grace au paramètre worN.
-    f_nn: np.ndarray = np.arange(0, fe / 2, fe / n)
     plt.subplot(3, 1, 2)
-    plt.semilogx(fir_freq_fz, 20 * np.log10(np.abs(fir_h_dft_fz)), label="freqz()")
-    plt.semilogx(f_nn, 20 * np.log10(np.abs(fir_h_dft_tf[0: n // 2])), label="TF")
-    plt.ylim(top=10, bottom=-200)
+    plt.semilogx(fir_freq_fz, 20 * np.log10(np.abs(fir_h_dft_fz)), label=Label_Graph)
+    if(n == 256):
+        plt.semilogx(f_nn, 20 * np.log10(np.abs(fir_h_dft_tf[0: n // 2])), label="TF")
+    plt.ylim(top=10, bottom=-45)
     plt.title("Fonctions de transfert harmoniques du filtre FIR")
     plt.xlabel("Fréquence [Hz]")
     plt.ylabel("Gain [dB]")
     plt.legend()
-    # Graphiques des fonctions de transfert harmoniques du filtre IIR (freqz & TF)
-    # aux fréquences non‐négatives seulement.
-    plt.subplot(3, 1, 3)
-    plt.semilogx(freq_iir_fz, 20 * np.log10(np.abs(h_dft_iir_fz)), label="freqz()")
-    plt.semilogx(f_nn, 20 * np.log10(np.abs(h_dft_iir_tf[0: n // 2])), label="TF")
-    plt.ylim(top=10, bottom=-200)
-    plt.title("Fonctions de transfert harmoniques du filtre IIR")
-    plt.xlabel("Fréquence [Hz]")
-    plt.ylabel("Gain [dB]")
-    plt.legend()
-    plt.show()
 
-def code_exemple_guide_etudiant():
-    """
-    Fonction principale appelant les fonctions secondaires (e.g. main() en C++)
-    """
+    fir_h_dft_tf *= 2**13
+
+    return fir_h_dft_tf
+
+def main():
     # Propriétés par défaut de matplotlib
     plt.rcParams.update(
         {
@@ -88,15 +49,58 @@ def code_exemple_guide_etudiant():
             "interactive": True,
         }
     )
-    # Appel des fonctions spécifiques
-    n: int = 1024
-    fc: float = 100
-    fe: float = 22100
-    calcul_des_filtres(n, fc, fe)
+    plt.figure()
 
-    # Breakpoint pour mettre l'interpréteur en pause afin d’afficher les figures
-    print("Done!")
+    n: int = 256        #Ordre
+    fc: float = 500     #Frequence coupure
+    fe: float = 20000   #frequence echantillon
+    H7 = calcul_des_filtres(n, fc, fe, 'H7: lowpass (fc = 500Hz)', "lowpass")
 
+    n: int = 256  # Ordre
+    fc: float = [500, 1500]  # Frequence coupure
+    fe: float = 20000  # frequence echantillon
+    H6 = calcul_des_filtres(n, fc, fe, 'H6: bandpass (fc = 1000Hz)', "bandpass")
+
+    n: int = 256  # Ordre
+    fc: float = [1500, 2500]  # Frequence coupure
+    fe: float = 20000  # frequence echantillon
+    H5 = calcul_des_filtres(n, fc, fe, 'H5: bandpass (fc = 2000Hz)', "bandpass")
+
+    n: int = 256  # Ordre
+    fc: float = [2500, 4500]  # Frequence coupure
+    fe: float = 20000  # frequence echantillon
+    H4 = calcul_des_filtres(n, fc, fe, 'H4: bandpass (fc = 3500Hz)', "bandpass")
+
+    n: int = 255  # Ordre
+    fc: float = 4490  # Frequence coupure
+    fe: float = 20000  # frequence echantillon
+    H3 = calcul_des_filtres(n, fc, fe, 'H3: highpass (fc = 4490Hz)', "highpass")
+
+    with open("OUT.h", "w") as fd:
+        fd.write(f"#define H_and_W_QXY_RES_NBITS 13 // Q2.13\n// Lowpass filter (blackman window), fc = 500 Hz, fe = 20000 Hz\nconst int32c H7[FFT_LEN] = {{\n")
+        for a in H7:
+            fd.write(f"{{{int(np.round(a.real))},{int(np.round(a.imag))}}},\n")
+        fd.write("};\n")
+        fd.write(f"// Bandpass filter, fcLow = 500 Hz,fcHigh = 1500 Hz, fe = 20000 Hz\nconst int32c H6[FFT_LEN] = {{\n")
+        for b in H6:
+            fd.write(f"{{{int(np.round(b.real))},{int(np.round(b.imag))}}},\n")
+        fd.write("};\n")
+        fd.write(f"// Bandpass filter, fcLow = 1500 Hz,fcHigh = 2500 Hz, fe = 20000 Hz\nconst int32c H5[FFT_LEN] = {{\n")
+        for c in H5:
+            fd.write(f"{{{int(np.round(c.real))},{int(np.round(c.imag))}}},\n")
+        fd.write("};\n")
+        fd.write(f"// Bandpass filter, fcLow = 2500 Hz,fcHigh = 4500 Hz, fe = 20000 Hz\nconst int32c H4[FFT_LEN] = {{\n")
+        for d in H4:
+            fd.write(f"{{{int(np.round(d.real))},{int(np.round(d.imag))}}},\n")
+        fd.write("};\n")
+        fd.write(f"// Highpass filter, fc = 4490 Hz, fe = 20000 Hz\nconst int32c H3[FFT_LEN] = {{\n")
+        for e in H3:
+            fd.write(f"{{{int(np.round(e.real))},{int(np.round(e.imag))}}},\n")
+        fd.write("};\n")
+
+    #plt.show()
+
+    print('Whats up Bro')
 
 if __name__ == "__main__":
-    code_exemple_guide_etudiant()
+    main()
