@@ -87,30 +87,30 @@ def main():
     fe: float = 20000  # frequence echantillon
     H3 = calcul_des_filtres(n, fc, fe, 'H3: highpass (fc = 4490Hz)', "highpass")
 
-    #print out in fiheir
-    with open("filterFIRcoeffs.h", "w") as fd:
-        fd.write(f"#define H_and_W_QXY_RES_NBITS 13 // Q2.13\n// Lowpass filter (blackman window), fc = 500 Hz, fe = 20000 Hz\nconst int32c H7[FFT_LEN] = {{\n")
-        for a in H7:
-            fd.write(f"{{{int(np.round(a.real))},{int(np.round(a.imag))}}},\n")
-        fd.write("};\n")
-        fd.write(f"// Bandpass filter, fcLow = 500 Hz,fcHigh = 1500 Hz, fe = 20000 Hz\nconst int32c H6[FFT_LEN] = {{\n")
-        for b in H6:
-            fd.write(f"{{{int(np.round(b.real))},{int(np.round(b.imag))}}},\n")
-        fd.write("};\n")
-        fd.write(f"// Bandpass filter, fcLow = 1500 Hz,fcHigh = 2500 Hz, fe = 20000 Hz\nconst int32c H5[FFT_LEN] = {{\n")
-        for c in H5:
-            fd.write(f"{{{int(np.round(c.real))},{int(np.round(c.imag))}}},\n")
-        fd.write("};\n")
-        fd.write(f"// Bandpass filter, fcLow = 2500 Hz,fcHigh = 4500 Hz, fe = 20000 Hz\nconst int32c H4[FFT_LEN] = {{\n")
-        for d in H4:
-            fd.write(f"{{{int(np.round(d.real))},{int(np.round(d.imag))}}},\n")
-        fd.write("};\n")
-        fd.write(f"// Highpass filter, fc = 4490 Hz, fe = 20000 Hz\nconst int32c H3[FFT_LEN] = {{\n")
-        for e in H3:
-            fd.write(f"{{{int(np.round(e.real))},{int(np.round(e.imag))}}},\n")
-        fd.write("};\n")
-
-    #plt.show()
+    Print_Texte = False
+    if(Print_Texte):
+        #print out in fichier
+        with open("OUT.h", "w") as fd:
+            fd.write(f"#define H_and_W_QXY_RES_NBITS 13 // Q2.13\n// Lowpass filter (blackman window), fc = 500 Hz, fe = 20000 Hz\nconst int32c H7[FFT_LEN] = {{\n")
+            for a in H7:
+                fd.write(f"{{{int(np.round(a.real))},{int(np.round(a.imag))}}},\n")
+            fd.write("};\n")
+            fd.write(f"// Bandpass filter, fcLow = 500 Hz,fcHigh = 1500 Hz, fe = 20000 Hz\nconst int32c H6[FFT_LEN] = {{\n")
+            for b in H6:
+                fd.write(f"{{{int(np.round(b.real))},{int(np.round(b.imag))}}},\n")
+            fd.write("};\n")
+            fd.write(f"// Bandpass filter, fcLow = 1500 Hz,fcHigh = 2500 Hz, fe = 20000 Hz\nconst int32c H5[FFT_LEN] = {{\n")
+            for c in H5:
+                fd.write(f"{{{int(np.round(c.real))},{int(np.round(c.imag))}}},\n")
+            fd.write("};\n")
+            fd.write(f"// Bandpass filter, fcLow = 2500 Hz,fcHigh = 4500 Hz, fe = 20000 Hz\nconst int32c H4[FFT_LEN] = {{\n")
+            for d in H4:
+                fd.write(f"{{{int(np.round(d.real))},{int(np.round(d.imag))}}},\n")
+            fd.write("};\n")
+            fd.write(f"// Highpass filter, fc = 4490 Hz, fe = 20000 Hz\nconst int32c H3[FFT_LEN] = {{\n")
+            for e in H3:
+                fd.write(f"{{{int(np.round(e.real))},{int(np.round(e.imag))}}},\n")
+            fd.write("};\n")
 
     print('Whats up Bro')
 

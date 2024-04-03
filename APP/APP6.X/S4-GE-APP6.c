@@ -312,7 +312,9 @@ int main(void) {
 
                 for (n = 0; n < FFT_LEN ; n++) 
                 {
-                    inFFT[n].re = outFFT[n].re*Htot[n].re - outFFT[n].im*Htot[n].im;
+                    //inFFT[n].re = (outFFT[n].re*Htot[n].re - outFFT[n].im*Htot[n].im) >> 13;
+                    //inFFT[n].im = -1 * ((outFFT[n].re*Htot[n].im + outFFT[n].im*Htot[n].re)>> 13);
+                    inFFT[n].re = (outFFT[n].re*Htot[n].re - outFFT[n].im*Htot[n].im);
                     inFFT[n].im = -1 * (outFFT[n].re*Htot[n].im + outFFT[n].im*Htot[n].re);
                 }
                 
