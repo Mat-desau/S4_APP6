@@ -297,7 +297,7 @@ int main(void) {
                 }
                 for (; n < FFT_LEN; n++) 
                 {
-                    inFFT[n].re = (previousInBuffer[n]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].re = (previousInBuffer[n - H_LEN]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
                     inFFT[n].im = 0;
                 }
                 

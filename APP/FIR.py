@@ -14,11 +14,11 @@ def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
     # pour un FIR, notez les bi qui sont les coefficients de la réponse
     # impulsionnelle et qu’il n’y a qu’un seul coefficient aj (a0 = 1),
     # ainsi que l'usage du paramètre worN pour augmenter la résolution du spectre.
-    f_nn: np.ndarray = np.arange(0, fe / 2, fe / n)
+    f_nn: np.ndarray = np.arange(0, fe / 2, fe / NombreEchantillons)
     fir_freq_fz, fir_h_dft_fz = signal.freqz(b=fir_h, a=1, worN=NombreEchantillons, fs=fe)
 
     plt.subplot(3, 1, 1)
-    plt.plot(fir_h, label="FIR")
+    plt.plot(fir_h, label=Label_Graph)
     plt.title("Réponses impulsionnelles des filtres")
     plt.xlabel("n")
     plt.ylabel("Amplitude normalisée")
@@ -26,15 +26,26 @@ def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
 
     plt.subplot(3, 1, 2)
     plt.semilogx(fir_freq_fz, 20 * np.log10(np.abs(fir_h_dft_fz)), label=Label_Graph)
-    if(n == 256):
-        plt.semilogx(f_nn, 20 * np.log10(np.abs(fir_h_dft_tf[0: n // 2])), label="TF")
+    #if(n == 256):
+        #plt.semilogx(f_nn, 20 * np.log10(np.abs(fir_h_dft_tf[0: n // 2])), label="TF")
     plt.ylim(top=10, bottom=-45)
-    plt.title("Fonctions de transfert harmoniques du filtre FIR")
+    plt.xlim(left=10, right=10000)
+    plt.title("Freqz")
+    plt.xlabel("Fréquence [Hz]")
+    plt.ylabel("Gain [dB]")
+    plt.legend()
+
+    plt.subplot(3, 1, 3)
+    plt.semilogx(f_nn, 20 * np.log10(np.abs(fir_h_dft_tf[0: NombreEchantillons // 2])), label=Label_Graph)
+    plt.ylim(top=10, bottom=-45)
+    plt.xlim(left=10, right=10000)
+    plt.title("FFT (TF)")
     plt.xlabel("Fréquence [Hz]")
     plt.ylabel("Gain [dB]")
     plt.legend()
 
     fir_h_dft_tf *= 2**13
+    fir_h_dft_fz *= 2 ** 13
 
     return fir_h_dft_tf
 
@@ -76,7 +87,8 @@ def main():
     fe: float = 20000  # frequence echantillon
     H3 = calcul_des_filtres(n, fc, fe, 'H3: highpass (fc = 4490Hz)', "highpass")
 
-    with open("OUT.h", "w") as fd:
+    #print out in fiheir
+    with open("filterFIRcoeffs.h", "w") as fd:
         fd.write(f"#define H_and_W_QXY_RES_NBITS 13 // Q2.13\n// Lowpass filter (blackman window), fc = 500 Hz, fe = 20000 Hz\nconst int32c H7[FFT_LEN] = {{\n")
         for a in H7:
             fd.write(f"{{{int(np.round(a.real))},{int(np.round(a.imag))}}},\n")
