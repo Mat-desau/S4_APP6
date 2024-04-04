@@ -2,7 +2,7 @@
 from matplotlib import pyplot as plt, rcParams as mpl_rcParams
 import numpy as np
 from scipy import signal
-
+pi = np.pi
 def printtofile(file):
     # Breakpoint pour mettre l'interpréteur en pause afin d’afficher les figures
     text_file = open("window.h", "w")
@@ -21,7 +21,6 @@ def main():
     han = np.hanning(768)
     han = han * (2**13)
     han_int32 = han.astype(np.int32)
-    print(han_int32)
 
     #printtofile(han_int32)
 
