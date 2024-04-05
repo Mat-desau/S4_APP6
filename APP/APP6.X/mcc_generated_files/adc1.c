@@ -136,39 +136,17 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
          {
             // *** POINT C1
              
-            //(b0, b1, b2, a0, a1, a2)
-            //IIRu[N_SOS_SECTIONS] = {0}, IIRv[N_SOS_SECTIONS] = {0}
-             
 			y = ((IIRCoeffs[nSOS][0])*(x)) + (IIRv[nSOS]);
              
-            //y = ((IIRCoeffs[nSOS][0])*(x)); //
-            
             y = (int16_t)(y >> 13);
-            
-            //y = y + (IIRv[nSOS]); //
 			
-			IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) + ((IIRCoeffs[nSOS][4])*(y)) + (IIRu[nSOS]);
-                    
-            //IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) + ((IIRCoeffs[nSOS][4])*(y)) ; //
+			IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) - ((IIRCoeffs[nSOS][4])*(y)) + (IIRu[nSOS]);
             
-            //IIRv[nSOS] = (int16_t)(IIRv[nSOS] >> 13); //
-            
-            //IIRv[nSOS] = IIRv[nSOS] + (IIRu[nSOS]); //
-            
-			
-			IIRu[nSOS] = ((IIRCoeffs[nSOS][2])*(x)) + ((IIRCoeffs[nSOS][5])*(y));
-            
-            //IIRu[nSOS] = (int16_t)(IIRu[nSOS] >> 13); //
+			IIRu[nSOS] = ((IIRCoeffs[nSOS][2])*(x)) - ((IIRCoeffs[nSOS][5])*(y));
              
             // Update the input for the next SOS section
             x = y;
         }
-        
-//        for (nSOS = 0; nSOS < N_SOS_SECTIONS; nSOS++) 
-//        {
-//            IIRu[nSOS] = 0;
-//            IIRv[nSOS] = 0;
-//        }
        
         // Copy the resulting filtered sample to the current output buffer
         currentOutBuffer[bufferCount] = y;
