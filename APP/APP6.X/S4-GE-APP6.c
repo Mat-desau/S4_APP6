@@ -235,6 +235,8 @@ int main(void) {
                     inFFT[n].im = 0;
                 }
                 
+                
+                
                 // *** POINT A2: calculate frequency spectrum components X[k] with PIC32 DSP Library FFT function call
                 mips_fft32(outFFT, inFFT, fftc, Scratch, log2N);
 
@@ -303,7 +305,6 @@ int main(void) {
                     inFFT[n].re = (previousInBuffer[n - H_LEN]) * FFT_LEN;
                     inFFT[n].im = 0;
                 }
-                
 
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
 

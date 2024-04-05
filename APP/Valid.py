@@ -16,6 +16,7 @@ def Q2_28_to_Q15(Valeur):
     Temp = Temp.astype(np.int16)
     return Temp
 
+
 def Calcul(Sinus, sos):
     OUT1 = np.zeros_like(Sinus)
     IIRv1 = np.zeros(4)
@@ -43,7 +44,7 @@ def Cree_Sin(f_sig, fe, n, fois):
     Temp = fois * np.sin(2 * np.pi * np.arange(n) * f_sig / fe)
     return MiseQ15(Temp)
 
-def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
+def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type, fois):
     NombreEchantillons: int = 1024  # Nombre echantillon
 
     # Filtre FIR: réponse impulsionnelle d'ordre N‐1 à fréquence de coupure fc
@@ -58,35 +59,35 @@ def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
     f_nn: np.ndarray = np.arange(0, fe / 2, fe / NombreEchantillons)
     fir_freq_fz, fir_h_dft_fz = signal.freqz(b=fir_h, a=1, worN=NombreEchantillons, fs=fe)
 
-    plt.subplot(3, 1, 1)
-    plt.plot(fir_h, label=Label_Graph)
-    plt.title("Réponses impulsionnelles des filtres")
-    plt.xlabel("n")
-    plt.ylabel("Amplitude normalisée")
-    plt.legend()
+    #plt.subplot(3, 1, 1)
+    #plt.plot(fir_h, label=Label_Graph)
+    #plt.title("Réponses impulsionnelles des filtres")
+    #plt.xlabel("n")
+    #plt.ylabel("Amplitude normalisée")
+    #plt.legend()
 
-    plt.subplot(3, 1, 2)
-    plt.semilogx(fir_freq_fz, 20 * np.log10(np.abs(fir_h_dft_fz)), label=Label_Graph)
+    #plt.subplot(3, 1, 2)
+    #plt.semilogx(fir_freq_fz, 20 * np.log10(np.abs(fir_h_dft_fz)), label=Label_Graph)
     #if(n == 256):
         #plt.semilogx(f_nn, 20 * np.log10(np.abs(fir_h_dft_tf[0: n // 2])), label="TF")
-    plt.ylim(top=10, bottom=-45)
-    plt.xlim(left=10, right=10000)
-    plt.title("Freqz")
-    plt.xlabel("Fréquence [Hz]")
-    plt.ylabel("Gain [dB]")
-    plt.legend()
+    #plt.ylim(top=10, bottom=-45)
+    #plt.xlim(left=10, right=10000)
+    #plt.title("Freqz")
+    #plt.xlabel("Fréquence [Hz]")
+    #plt.ylabel("Gain [dB]")
+    #plt.legend()
 
-    plt.subplot(3, 1, 3)
+    #plt.subplot(1, 1, 1)
     plt.semilogx(f_nn, 20 * np.log10(np.abs(fir_h_dft_tf[0: NombreEchantillons // 2])), label=Label_Graph)
-    plt.ylim(top=10, bottom=-45)
+    plt.ylim(top=10, bottom=-20)
     plt.xlim(left=10, right=10000)
     plt.title("FFT (TF)")
     plt.xlabel("Fréquence [Hz]")
     plt.ylabel("Gain [dB]")
     plt.legend()
 
-    fir_h_dft_tf *= 2**13
-    fir_h_dft_fz *= 2**13
+    fir_h_dft_tf *= 2**fois
+    fir_h_dft_fz *= 2**fois
 
     fir_h_dft_fz = np.round(fir_h_dft_fz)
     fir_h_dft_tf = np.round(fir_h_dft_tf)
@@ -138,33 +139,46 @@ def H3_a_H7():
     n: int = 256  # Ordre
     fc: float = 500  # Frequence coupure
     fe: float = 20000  # frequence echantillon
-    H7 = calcul_des_filtres(n, fc, fe, 'H7: lowpass (fc = 500Hz)', "lowpass")
+    H7 = calcul_des_filtres(n, fc, fe, 'H7: lowpass (fc = 500Hz)', "lowpass", 13)
+    H7_5 = calcul_des_filtres(n, fc, fe, 'H7_5: lowpass (fc = 500Hz)', "lowpass", 5)
 
     n: int = 256  # Ordre
     fc: float = [500, 1500]  # Frequence coupure
     fe: float = 20000  # frequence echantillon
-    H6 = calcul_des_filtres(n, fc, fe, 'H6: bandpass (fc = 1000Hz)', "bandpass")
+    H6 = calcul_des_filtres(n, fc, fe, 'H6: bandpass (fc = 1000Hz)', "bandpass", 13)
+    H6_5 = calcul_des_filtres(n, fc, fe, 'H6_5: bandpass (fc = 1000Hz)', "bandpass", 5)
 
     n: int = 256  # Ordre
     fc: float = [1500, 2500]  # Frequence coupure
     fe: float = 20000  # frequence echantillon
-    H5 = calcul_des_filtres(n, fc, fe, 'H5: bandpass (fc = 2000Hz)', "bandpass")
+    H5 = calcul_des_filtres(n, fc, fe, 'H5: bandpass (fc = 2000Hz)', "bandpass", 13)
+    H5_5 = calcul_des_filtres(n, fc, fe, 'H5_5: bandpass (fc = 2000Hz)', "bandpass", 5)
 
     n: int = 256  # Ordre
     fc: float = [2500, 4500]  # Frequence coupure
     fe: float = 20000  # frequence echantillon
-    H4 = calcul_des_filtres(n, fc, fe, 'H4: bandpass (fc = 3500Hz)', "bandpass")
+    H4 = calcul_des_filtres(n, fc, fe, 'H4: bandpass (fc = 3500Hz)', "bandpass", 13)
+    H4_5 = calcul_des_filtres(n, fc, fe, 'H4: bandpass (fc = 3500Hz)', "bandpass", 5)
 
     n: int = 255  # Ordre
     fc: float = 4490  # Frequence coupure
     fe: float = 20000  # frequence echantillon
-    H3 = calcul_des_filtres(n, fc, fe, 'H3: highpass (fc = 4490Hz)', "highpass")
+    H3 = calcul_des_filtres(n, fc, fe, 'H3: highpass (fc = 4490Hz)', "highpass", 13)
+    H3_5 = calcul_des_filtres(n, fc, fe, 'H3: highpass (fc = 4490Hz)', "highpass", 5)
 
     Htot = H7 + H6 + H5 + H4 + H3
+    Htot_5 = H7_5 + H6_5 + H5_5 + H4_5 + H3_5
 
-    x400 = Cree_Sin(400, 20000, 1024, 1)
+    x2000 = Cree_Sin(2000, 20000, 1024, 0.05)
+    x1500 = Cree_Sin(1500, 20000, 1024, 0.05)
+    x3500 = Cree_Sin(3500, 20000, 1024, 0.05)
+    x5500 = Cree_Sin(5500, 20000, 1024, 0.05)
+    fnn = np.arange(0, fe, fe / 1024)
 
-    FFT = np.fft.fft(x400, n=1024)
+    FFT = np.fft.fft(x2000, n=1024)
+    FFT_1500 = np.fft.fft(x1500, n=1024)
+    FFT_3500 = np.fft.fft(x3500, n=1024)
+    FFT_5500 = np.fft.fft(x5500, n=1024)
 
     FFT_H7 = Q2_28_to_Q15(FFT * H7)
     FFT_H6 = Q2_28_to_Q15(FFT * H6)
@@ -172,12 +186,48 @@ def H3_a_H7():
     FFT_H4 = Q2_28_to_Q15(FFT * H4)
     FFT_H3 = Q2_28_to_Q15(FFT * H3)
 
+    FFT_H4_OVER = Q2_28_to_Q15(FFT_5500 * H4)
+    FFT_H4_UNDER = Q2_28_to_Q15(FFT_1500 * H4)
+    FFT_H4_COUPURE = Q2_28_to_Q15(FFT_3500 * H4)
+
     FFT_Filtrer_Q2_28 = FFT * Htot                                                            #En Q2.28
+    FFT_Filtrer_Q2_20 = FFT * Htot_5
 
     FFT_Filtrer_Q15 = Q2_28_to_Q15(FFT_Filtrer_Q2_28)
 
     iFFT_Q2_28 = np.fft.ifft(FFT_Filtrer_Q2_28)
+    iFFT_Q2_20 = np.fft.ifft(FFT_Filtrer_Q2_20)
     iFFT_Q15 = np.fft.ifft(FFT_Filtrer_Q15)
+
+    Figure, [SUB1, SUB2] = plt.subplots(2, 1)
+    Figure.suptitle('Graphiques Test H4')
+    SUB1.plot(MiseLog(FFT_H4_OVER), label='f > fc')
+    SUB1.plot(MiseLog(FFT_H4_UNDER), label='f < fc')
+    SUB1.plot(MiseLog(FFT_H4_COUPURE), label='f = fc')
+    SUB1.set_title('FFT')
+    SUB1.set_ylabel('Amplitude (dB)')
+    SUB1.set_xlabel('Nombre d\'échantillons [k]')
+    SUB1.legend()
+
+    SUB2.semilogx(fnn, MiseLog(FFT_H4_OVER), label='f > fc')
+    SUB2.semilogx(fnn, MiseLog(FFT_H4_UNDER), label='f < fc')
+    SUB2.semilogx(fnn, MiseLog(FFT_H4_COUPURE), label='f = fc')
+    SUB2.set_title('FFT')
+    SUB2.set_ylabel('Amplitude (dB)')
+    SUB2.set_xlabel('Fréquence (Hz)')
+    SUB2.legend()
+
+    Figure, [SUB1, SUB2] = plt.subplots(2, 1)
+    Figure.suptitle('Graphiques B0 & B1')
+    SUB1.plot(MiseLog(FFT))
+    SUB1.set_title('FFT')
+    SUB1.set_ylabel('Amplitude (dB)')
+    SUB1.set_xlabel('Nombre d\'échantillons [k]')
+
+    SUB2.semilogx(fnn, MiseLog(FFT))
+    SUB2.set_title('FFT')
+    SUB2.set_ylabel('Amplitude (dB)')
+    SUB2.set_xlabel('Fréquence (Hz)')
 
     Figure, [SUB1, SUB2, SUB3] = plt.subplots(3, 1)
     Figure.suptitle('Graphiques B2 avec Q différents')
@@ -187,17 +237,17 @@ def H3_a_H7():
     SUB1.set_xlabel('Nombre d\'échantillons [k]')
 
     SUB2.plot(MiseLog(FFT_Filtrer_Q2_28), label='Q2.28', color='red')
-    SUB2.plot(MiseLog(FFT_Filtrer_Q15), label='Q15', color='blue')
+    SUB2.plot(MiseLog(FFT_Filtrer_Q2_20), label='Q2.20', color='blue')
     SUB2.set_title('FFT avec les filtres')
     SUB2.set_ylabel('Amplitude (dB)')
     SUB2.set_xlabel('Nombre d\'échantillons [k]')
     SUB2.legend()
 
-    SUB3.plot(np.arange(len(x400)) / fe, iFFT_Q2_28, label='IIFT Q2.28', color='red')
-    SUB3.plot(np.arange(len(x400))/fe, iFFT_Q15, label='IIFT Q15', color='blue')
-    SUB3.set_title('IFFT')
+    SUB3.semilogx(fnn, MiseLog(FFT_Filtrer_Q2_28), label='Q2.28', color='red')
+    SUB3.semilogx(fnn, MiseLog(FFT_Filtrer_Q2_20), label='Q2.20', color='blue')
+    SUB3.set_title('FFT avec les filtres')
     SUB3.set_ylabel('Amplitude')
-    SUB3.set_xlabel('Temps (s)')
+    SUB3.set_xlabel('Fréquence (Hz)')
     SUB3.legend()
 
     Figure2, SUB = plt.subplots(3, 2)
@@ -269,20 +319,23 @@ def C1():
 
     Figure, [SUB1, SUB2, SUB3] = plt.subplots(3, 1)
     Figure.suptitle('Graphiques C1')
-    SUB1.plot(OUT1, color='blue')
-    SUB1.plot(x900, color='red')
+    SUB1.plot(OUT1, color='blue', label='Sortie')
+    SUB1.plot(x900, color='red', label='Entree')
     SUB1.set_title('900 Hz')
     SUB1.set_xlabel('Nombre d\'échantillons [k]')
+    SUB1.legend()
 
-    SUB2.plot(OUT2, color='blue')
-    SUB2.plot(x1000, color='red')
+    SUB2.plot(OUT2, color='blue', label='Sortie')
+    SUB2.plot(x1000, color='red', label='Entree')
     SUB2.set_title('1000 Hz')
     SUB2.set_xlabel('Nombre d\'échantillons [k]')
+    SUB2.legend()
 
-    SUB3.plot(OUT3, color='blue')
-    SUB3.plot(x1100, color='red')
+    SUB3.plot(OUT3, color='blue', label='Sortie')
+    SUB3.plot(x1100, color='red', label='Entree')
     SUB3.set_title('1100 Hz')
     SUB3.set_xlabel('Nombre d\'échantillons [k]')
+    SUB3.legend()
 
 
 def main():
