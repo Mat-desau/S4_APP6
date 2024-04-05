@@ -8,7 +8,7 @@ def MiseLog(Valeur):
 def A2_A3():
     fe = 20000
     nombre_n = 768
-
+    divise = fe / 1024
     han = np.hanning(nombre_n)
 
     # Sinusoïde à 200 Hz, rallongée à longueur 2N par "zero‐padding"
@@ -16,11 +16,12 @@ def A2_A3():
 
     x2000 = np.sin(2 * np.pi * np.arange(nombre_n) * f_sig / fe)
 
-    fnn = np.arange(0, fe, fe/nombre_n)
+    fnn = np.arange(0, fe, fe/1024)
 
     x2000_han = x2000 * han
-    FFT = np.fft.fft(x2000, n=nombre_n)
-    FFT_han = np.fft.fft(x2000_han, n=nombre_n)
+
+    FFT = np.fft.fft(x2000, n=1024)
+    FFT_han = np.fft.fft(x2000_han, n=1024)
 
     Figure, [SUB1, SUB2, SUB3] = plt.subplots(3, 1)
     SUB1.plot(np.arange(len(x2000)) / fe, x2000)
@@ -28,18 +29,18 @@ def A2_A3():
     SUB1.set_xlabel("Temps (s)")
     SUB1.set_ylabel("Amplitude normalisée")
 
-    SUB2.plot(fnn, MiseLog(FFT), label='Fenêtre Rectangulaire')
-    SUB2.plot(fnn, MiseLog(FFT_han), label='Fenêtre Hanning')
+    SUB2.plot(fnn/divise, MiseLog(FFT), label='Fenêtre Rectangulaire')
+    SUB2.plot(fnn/divise, MiseLog(FFT_han), label='Fenêtre Hanning')
     SUB2.set_title(f"Spectre de la sinus de {f_sig} Hz")
-    SUB2.set_xlabel("Fréquence [k]")
+    SUB2.set_xlabel("Nombre d'échantillons (N)")
     SUB2.set_ylabel("Amplitude normalisée")
     SUB2.legend()
 
     SUB3.semilogx(fnn, MiseLog(FFT), label='Fenêtre Rectangulaire')
     SUB3.semilogx(fnn, MiseLog(FFT_han), label='Fenêtre Hanning')
     SUB3.set_title(f"Spectre de la sinus de {f_sig} Hz")
-    SUB3.set_xlabel("Fréquence [k]")
-    SUB3.set_ylabel("Amplitude normalisée")
+    SUB3.set_xlabel("Fréquence [k] (log)")
+    SUB3.set_ylabel("Amplitude normalisée (dB)")
     SUB3.legend()
 
 def H3_a_H7():
@@ -116,6 +117,7 @@ def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
     fir_h_dft_fz *= 2 ** 13
 
     return fir_h_dft_tf
+
 def main():
     # Propriétés par défaut de matplotlib
     plt.rcParams.update(
