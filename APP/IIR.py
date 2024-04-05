@@ -32,7 +32,8 @@ def CalculFiltre(fe: float):
     #plt.legend()
     plt.title('Réponses en fréquence de filtre elliptique')
     plt.xlabel('Fréquence [Hz]')
-    plt.ylim(top=5, bottom=-125)
+    plt.ylim(top=5, bottom=-100)
+    plt.xlim(left=100, right=10000)
     plt.ylabel('Gain [dB]')
     plt.legend()
 
@@ -53,6 +54,7 @@ def CalculFiltre(fe: float):
     SUB2.set_title('Filtre passe-haut - Réponse impulsionelle')
     SUB2.set_xlabel('n')
     SUB2.set_ylabel('Amplitude')
+
     #Numero 2
     while(len(fir_low_h) < 4*N):
         fir_low_h = np.append(fir_low_h, 0)

@@ -4,7 +4,8 @@ from scipy import signal
 
 pi = np.pi
 def MiseLog(Valeur):
-    return 20*np.log10(Valeur)
+    return 20*np.log10(np.abs(Valeur))
+
 def A2_A3():
     fe = 20000
     nombre_n = 768
@@ -43,6 +44,11 @@ def A2_A3():
     SUB3.set_ylabel("Amplitude normalisée (dB)")
     SUB3.legend()
 
+def Q2_13_to_Q15(Valeur):
+    Temp = Valeur * (2 ** (-13))
+    Temp = Temp.astype(np.int16)
+    return Temp
+
 def H3_a_H7():
     plt.figure()
 
@@ -70,6 +76,82 @@ def H3_a_H7():
     fc: float = 4490  # Frequence coupure
     fe: float = 20000  # frequence echantillon
     H3 = calcul_des_filtres(n, fc, fe, 'H3: highpass (fc = 4490Hz)', "highpass")
+
+    f_sig = 400
+    fe = 20000
+
+    Htot = H7 + H6 + H5 + H4 + H3
+
+    x400 = np.sin(2 * np.pi * np.arange(1024) * f_sig / fe)
+    x400 *= 2**15                                                               #Mise en Q15
+    x400 = np.round(x400)
+    x400 = x400.astype(np.int16)
+
+    FFT = np.fft.fft(x400, n=1024)
+
+    FFT_H7 = Q2_13_to_Q15(FFT * H7)
+    FFT_H6 = Q2_13_to_Q15(FFT * H6)
+    FFT_H5 = Q2_13_to_Q15(FFT * H5)
+    FFT_H4 = Q2_13_to_Q15(FFT * H4)
+    FFT_H3 = Q2_13_to_Q15(FFT * H3)
+
+    FFT_Filtrer_Q2_28 = FFT * Htot                                                            #En Q2.28
+
+    FFT_Filtrer_Q15 = Q2_13_to_Q15(FFT_Filtrer_Q2_28)
+
+    iFFT_Q2_28 = np.fft.ifft(FFT_Filtrer_Q2_28)
+    iFFT_Q15 = np.fft.ifft(FFT_Filtrer_Q15)
+
+    Figure, [SUB1, SUB2, SUB3] = plt.subplots(3, 1)
+    SUB1.plot(MiseLog(FFT))
+    SUB1.set_title('FFT')
+    SUB1.set_ylabel('Amplitude (dB)')
+    SUB1.set_xlabel('Nombre d\'échantillons [k]')
+
+    SUB2.plot(MiseLog(FFT_Filtrer_Q2_28), label='Q2.28', color='red')
+    SUB2.plot(MiseLog(FFT_Filtrer_Q15), label='Q15', color='blue')
+    SUB2.set_title('FFT avec les filtres')
+    SUB2.set_ylabel('Amplitude (dB)')
+    SUB2.set_xlabel('Nombre d\'échantillons [k]')
+    SUB2.legend()
+
+    SUB3.plot(np.arange(len(x400)) / fe, iFFT_Q2_28, label='IIFT Q2.28', color='red')
+    SUB3.plot(np.arange(len(x400))/fe, iFFT_Q15, label='IIFT Q15', color='blue')
+    SUB3.set_title('IFFT')
+    SUB3.set_ylabel('Amplitude')
+    SUB3.set_xlabel('Temps (s)')
+    SUB3.legend()
+
+    Figure2, SUB = plt.subplots(3, 2)
+    SUB[0][0].plot(MiseLog(FFT_H3))
+    SUB[0][0].set_title('H3')
+    SUB[0][0].set_ylabel('Amplitude (dB)')
+    SUB[0][0].set_xlabel('Nombre d\'échantillons [k]')
+
+    SUB[0][1].plot(MiseLog(FFT_H4))
+    SUB[0][1].set_title('H4')
+    SUB[0][1].set_ylabel('Amplitude (dB)')
+    SUB[0][1].set_xlabel('Nombre d\'échantillons [k]')
+
+    SUB[1][0].plot(MiseLog(FFT_H5))
+    SUB[1][0].set_title('H5')
+    SUB[1][0].set_ylabel('Amplitude (dB)')
+    SUB[1][0].set_xlabel('Nombre d\'échantillons [k]')
+
+    SUB[1][1].plot(MiseLog(FFT_H6))
+    SUB[1][1].set_title('H6')
+    SUB[1][1].set_ylabel('Amplitude (dB)')
+    SUB[1][1].set_xlabel('Nombre d\'échantillons [k]')
+
+    SUB[2][0].plot(MiseLog(FFT_H7))
+    SUB[2][0].set_title('H7')
+    SUB[2][0].set_ylabel('Amplitude (dB)')
+    SUB[2][0].set_xlabel('Nombre d\'échantillons [k]')
+
+    SUB[2][1].plot(MiseLog(FFT_Filtrer_Q15))
+    SUB[2][1].set_title('H3+H4+H5+H6+H7')
+    SUB[2][1].set_ylabel('Amplitude (dB)')
+    SUB[2][1].set_xlabel('Nombre d\'échantillons [k]')
 
 def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
     NombreEchantillons: int = 1024  # Nombre echantillon
@@ -114,9 +196,12 @@ def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type):
     plt.legend()
 
     fir_h_dft_tf *= 2**13
-    fir_h_dft_fz *= 2 ** 13
+    fir_h_dft_fz *= 2**13
 
-    return fir_h_dft_tf
+    fir_h_dft_fz = np.round(fir_h_dft_fz)
+    fir_h_dft_tf = np.round(fir_h_dft_tf)
+
+    return fir_h_dft_tf.astype(np.int32)
 
 def main():
     # Propriétés par défaut de matplotlib
@@ -129,8 +214,8 @@ def main():
         }
     )
 
-    A2_A3()
-    #H3_a_H7()
+    #A2_A3()
+    H3_a_H7()
 
     print('BreakPoint')
 

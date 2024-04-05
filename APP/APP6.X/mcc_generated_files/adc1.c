@@ -140,15 +140,36 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
             //IIRu[N_SOS_SECTIONS] = {0}, IIRv[N_SOS_SECTIONS] = {0}
              
 			y = ((IIRCoeffs[nSOS][0])*(x)) + (IIRv[nSOS]);
+             
+            //y = ((IIRCoeffs[nSOS][0])*(x)); //
+            
+            y = (int16_t)(y >> 13);
+            
+            //y = y + (IIRv[nSOS]); //
 			
 			IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) + ((IIRCoeffs[nSOS][4])*(y)) + (IIRu[nSOS]);
+                    
+            //IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) + ((IIRCoeffs[nSOS][4])*(y)) ; //
+            
+            //IIRv[nSOS] = (int16_t)(IIRv[nSOS] >> 13); //
+            
+            //IIRv[nSOS] = IIRv[nSOS] + (IIRu[nSOS]); //
+            
 			
 			IIRu[nSOS] = ((IIRCoeffs[nSOS][2])*(x)) + ((IIRCoeffs[nSOS][5])*(y));
             
+            //IIRu[nSOS] = (int16_t)(IIRu[nSOS] >> 13); //
+             
             // Update the input for the next SOS section
-            x = y / 8192;
+            x = y;
         }
-
+        
+//        for (nSOS = 0; nSOS < N_SOS_SECTIONS; nSOS++) 
+//        {
+//            IIRu[nSOS] = 0;
+//            IIRv[nSOS] = 0;
+//        }
+       
         // Copy the resulting filtered sample to the current output buffer
         currentOutBuffer[bufferCount] = y;
     }

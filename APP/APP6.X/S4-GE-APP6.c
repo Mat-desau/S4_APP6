@@ -227,7 +227,7 @@ int main(void) {
                 //      loss of resolution with an arithmetic shift by the difference of bits between
                 //      the two: ">> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN"
                 for (n = 0; n < SIG_LEN; n++) {
-                    inFFT[n].re = (previousInBuffer[n] * window2[n]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].re = (previousInBuffer[n] * window[n]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
                     inFFT[n].im = 0;
                 }
                 for (; n < FFT_LEN; n++) {
@@ -295,12 +295,12 @@ int main(void) {
                 //                decreases resolution of X[k] result.
                 for (n = 0; n < H_LEN; n++) 
                 {
-                    inFFT[n].re = (currentInBuffer[n + 512]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].re = (currentInBuffer[n + 512]) * FFT_LEN;
                     inFFT[n].im = 0;
                 }
                 for (; n < FFT_LEN; n++) 
                 {
-                    inFFT[n].re = (previousInBuffer[n - H_LEN]) >> (H_and_W_QXY_RES_NBITS - LOG2FFTLEN);
+                    inFFT[n].re = (previousInBuffer[n - H_LEN]) * FFT_LEN;
                     inFFT[n].im = 0;
                 }
                 
@@ -308,6 +308,7 @@ int main(void) {
                 // *** POINT B1: Calculate X[k] with PIC32 DSP Library FFT function call
 
                 mips_fft32(outFFT, inFFT, fftc, Scratch, log2N);
+                
                 calc_power_spectrum(outFFT, debugBuffer1, FFT_LEN);
                 
                 // *** POINT B2: FIR Filtering, calculate Y* = (HX)*, where "*" is the complex conjugate
@@ -315,11 +316,11 @@ int main(void) {
 
                 for (n = 0; n < FFT_LEN ; n++) 
                 {
-                    //inFFT[n].re = (outFFT[n].re*Htot[n].re - outFFT[n].im*Htot[n].im) >> 13;
-                    //inFFT[n].im = -1 * ((outFFT[n].re*Htot[n].im + outFFT[n].im*Htot[n].re)>> 13);
                     inFFT[n].re = (outFFT[n].re*Htot[n].re - outFFT[n].im*Htot[n].im);
-                    inFFT[n].im = -1 * (outFFT[n].re*Htot[n].im + outFFT[n].im*Htot[n].re);
+                    inFFT[n].im = (-1) * (outFFT[n].re*Htot[n].im + outFFT[n].im*Htot[n].re);
                 }
+                
+                
                 
                 // *** POINT B3: Inverse FFT by forward FFT library function call, no need to divide by N
                 calc_power_spectrum(inFFT, debugBuffer2, FFT_LEN);
@@ -331,7 +332,7 @@ int main(void) {
                 
                 for (n = 0; n < SIG_LEN; n++) 
                 {
-                    previousOutBuffer[n] = outFFT[n+256].re;
+                    previousOutBuffer[n] = (int16_t)(outFFT[n+256].re >> 13);
                     //previousOutBuffer[n].im = outFFT[n+256].im;
                 }
 
