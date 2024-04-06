@@ -85,7 +85,7 @@ def CalculFiltre(fe: float):
 
     print('yo')
 
-    sos *= (2**13)
+    sos *= (2**5)
     return sos
 
 def main():
@@ -105,8 +105,8 @@ def main():
     Print_Texte = True
     if (Print_Texte):
         # print out in fichier
-        with open("filterIIRcoeffs.h", "w") as fd:
-            fd.write(f"// IIRCoeffs : coefficients (b0, b1, b2, a0, a1, a2) for N_SOS_SECTIONS cascaded SOS sections\n#define IIR_QXY_RES_NBITS 13 // Q2.13\n#define N_SOS_SECTIONS 4\nint32_t IIRCoeffs[N_SOS_SECTIONS][6] = {{\n")
+        with open("filterIIRcoeffsQ_2_5.h", "w") as fd:
+            fd.write(f"// IIRCoeffs : coefficients (b0, b1, b2, a0, a1, a2) for N_SOS_SECTIONS cascaded SOS sections\n#define IIR_QXY_RES_NBITS 13 // Q2.13\n#define N_SOS_SECTIONS 4\nint32_t IIRCoeffs_Q2_5[N_SOS_SECTIONS][6] = {{\n")
             for a in range(0, 4):
                 fd.write("{")
                 for b in range(0, 6):
