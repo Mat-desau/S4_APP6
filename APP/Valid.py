@@ -22,16 +22,20 @@ def MiseLog(Valeur):
 def MiseQ15(Valeur):
     Valeur *= 2**15
     Valeur = np.round(Valeur)
-    return Valeur.astype(int)
+    Valeur = Valeur.astype(np.int16)
+    Valeur = Valeur.astype(int)
+    return Valeur
 
 def Q2_28_to_Q15(Valeur):
     Temp = Valeur * (2 ** (-13))
     Temp = Temp.astype(np.int16)
+    Temp = Temp.astype(int)
     return Temp
 
 def Q2_20_to_Q15(Valeur):
     Temp = Valeur * (2 ** (-5))
     Temp = Temp.astype(np.int16)
+    Temp = Temp.astype(int)
     return Temp
 
 def Calcul(Sinus, sos, Q_2_13):
@@ -322,9 +326,11 @@ def IIR():
                        btype="bandstop", output="sos")
 
     sos_Q2_13 = sos * (2**13)
-    #sos_Q2_13 = sos_Q2_13.astype(np.int16)
+    sos_Q2_13 = sos_Q2_13.astype(np.int16)
+    sos_Q2_13 = sos_Q2_13.astype(int)
     sos_Q2_5 = sos * (2**5)
     sos_Q2_5 = sos_Q2_5.astype(np.int8)
+    sos_Q2_5 = sos_Q2_5.astype(int)
 
     b1_13 = sos_Q2_13[0][0:3]
     a1_13 = sos_Q2_13[0][3:6]
@@ -410,27 +416,29 @@ def IIR():
 
     if(Filtre_IIR_Test_Sans_int8):
         Figure, [SUB1, SUB2, SUB3] = plt.subplots(3, 1)
-        Figure.suptitle('Graphiques C1')
+        #Figure.suptitle('Graphiques C1')
         SUB1.plot(OUT1, color='blue', label='Sortie Q2.13')
-        #SUB1.plot(OUT1_Q2_5, color='red', label='Sortie Q2.5')
+        SUB1.plot(OUT1_Q2_5, color='red', label='Sortie Q2.5')
         SUB1.plot(x900, color='grey', label='Entree')
         SUB1.set_title('900 Hz')
         SUB1.set_xlabel('Nombre d\'échantillons [k]')
         SUB1.legend()
 
         SUB2.plot(OUT2, color='blue', label='Sortie Q2.13')
-        #SUB2.plot(OUT2_Q2_5, color='red', label='Sortie Q2.5')
+        SUB2.plot(OUT2_Q2_5, color='red', label='Sortie Q2.5')
         SUB2.plot(x1000, color='grey', label='Entree')
         SUB2.set_title('1000 Hz')
         SUB2.set_xlabel('Nombre d\'échantillons [k]')
         SUB2.legend()
 
         SUB3.plot(OUT3, color='blue', label='Sortie Q2.13')
-        #SUB3.plot(OUT3_Q2_5, color='red', label='Sortie Q2.5')
+        SUB3.plot(OUT3_Q2_5, color='red', label='Sortie Q2.5')
         SUB3.plot(x1100, color='grey', label='Entree')
         SUB3.set_title('1100 Hz')
         SUB3.set_xlabel('Nombre d\'échantillons [k]')
         SUB3.legend()
+        
+    print('hi')
 
 
 def main():

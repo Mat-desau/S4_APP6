@@ -85,8 +85,9 @@ def CalculFiltre(fe: float):
 
     print('yo')
 
-    sos *= (2**5)
-    return sos
+    sos *= (2**13)
+    sos = np.round(sos)
+    return sos.astype(np.int16)
 
 def main():
     plt.rcParams.update(
@@ -102,7 +103,7 @@ def main():
     fe: float = 20000
     OUT = CalculFiltre(fe)
 
-    Print_Texte = True
+    Print_Texte = False
     if (Print_Texte):
         # print out in fichier
         with open("filterIIRcoeffsQ_2_5.h", "w") as fd:

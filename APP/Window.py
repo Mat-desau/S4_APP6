@@ -20,10 +20,10 @@ def printtofile(file):
 def main():
     han = np.hanning(768)
     han = han * (2**13)
-    han_int32 = han.astype(np.int32)
+    han_Q2_13 = han.astype(np.int16)
 
-    #printtofile(han_int32)
-
+    printtofile(han_Q2_13)
+    print('hi')
 
 if __name__ == "__main__":
     main()
