@@ -117,7 +117,7 @@ def calcul_des_filtres(n: int, fc: float, fe: float, Label_Graph, type, fois):
     fir_h_dft_fz = np.round(fir_h_dft_fz)
     fir_h_dft_tf = np.round(fir_h_dft_tf)
 
-    return fir_h_dft_tf.astype(np.int32)
+    return fir_h_dft_tf
 
 def Fenetrage():
     fe = 20000
@@ -368,20 +368,20 @@ def IIR():
     if (Reponse_Frequence_IIR):
         Figure, [SUB1, SUB2] = plt.subplots(2, 1)
         Figure.suptitle('Réponses en fréquence du filtre IIR')
-        SUB1.semilogx(w1_Q2_13, 20 * np.log10(np.abs(h1_Q2_13)), label='1')
-        SUB1.semilogx(w2_Q2_13, 20 * np.log10(np.abs(h2_Q2_13)), label='2')
-        SUB1.semilogx(w3_Q2_13, 20 * np.log10(np.abs(h3_Q2_13)), label='3')
-        SUB1.semilogx(w4_Q2_13, 20 * np.log10(np.abs(h4_Q2_13)), label='4')
+        SUB1.semilogx(w1_Q2_13, MiseLog(h1_Q2_13), label='1')
+        SUB1.semilogx(w2_Q2_13, MiseLog(h2_Q2_13), label='2')
+        SUB1.semilogx(w3_Q2_13, MiseLog(h3_Q2_13), label='3')
+        SUB1.semilogx(w4_Q2_13, MiseLog(h4_Q2_13), label='4')
         SUB1.set_title('Q2.13')
         SUB1.set_xlabel('Fréquence [Hz]')
         SUB1.set_ylim(top=15, bottom=-50)
         SUB1.set_xlim(left=100, right=10000)
         SUB1.set_ylabel('Gain [dB]')
 
-        SUB2.semilogx(w1_Q2_5, 20 * np.log10(np.abs(h1_Q2_5)), label='1')
-        SUB2.semilogx(w2_Q2_5, 20 * np.log10(np.abs(h2_Q2_5)), label='2')
-        SUB2.semilogx(w3_Q2_5, 20 * np.log10(np.abs(h3_Q2_5)), label='3')
-        SUB2.semilogx(w4_Q2_5, 20 * np.log10(np.abs(h4_Q2_5)), label='4')
+        SUB2.semilogx(w1_Q2_5, MiseLog(h1_Q2_5), label='1')
+        SUB2.semilogx(w2_Q2_5, MiseLog(h2_Q2_5), label='2')
+        SUB2.semilogx(w3_Q2_5, MiseLog(h3_Q2_5), label='3')
+        SUB2.semilogx(w4_Q2_5, MiseLog(h4_Q2_5), label='4')
         SUB2.set_title('Q2.5')
         SUB2.set_xlabel('Fréquence [Hz]')
         SUB2.set_ylim(top=20, bottom=-60)
@@ -393,7 +393,7 @@ def IIR():
     #Réponse impulsionelle
     #if(Reponse_Frequence_IIR):
         #plt.figure()
-        #plt.semilogx(wsos, 20 * np.log10(np.abs(h_dftsos)), color='blue')
+        #plt.semilogx(wsos, MiseLog(h_dftsos)), color='blue')
         #plt.title('Réponses en fréquence du filtre IIR')
         #plt.xlabel('Fréquence [Hz]')
         #plt.ylim(top=5, bottom=-100)
@@ -439,7 +439,6 @@ def IIR():
         SUB3.legend()
         
     print('hi')
-
 
 def main():
     # Propriétés par défaut de matplotlib

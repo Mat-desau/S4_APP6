@@ -135,23 +135,23 @@ void __ISR ( _ADC_VECTOR, IPL1AUTO ) ADC_1 (void)
          for (nSOS = 0; nSOS < N_SOS_SECTIONS; nSOS++) 
          {
             // *** POINT C1 avec Q2_13
-//			y = ((IIRCoeffs[nSOS][0])*(x)) + (IIRv[nSOS]);
-//            
-//            y = (int16_t)(y >> 13);
-//			
-//			IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) - ((IIRCoeffs[nSOS][4])*(y)) + (IIRu[nSOS]);
-//            
-//			IIRu[nSOS] = ((IIRCoeffs[nSOS][2])*(x)) - ((IIRCoeffs[nSOS][5])*(y));
+			y = ((IIRCoeffs[nSOS][0])*(x)) + (IIRv[nSOS]);
+            
+            y = (int16_t)(y >> 13);
+			
+			IIRv[nSOS] = ((IIRCoeffs[nSOS][1])*(x)) - ((IIRCoeffs[nSOS][4])*(y)) + (IIRu[nSOS]);
+            
+			IIRu[nSOS] = ((IIRCoeffs[nSOS][2])*(x)) - ((IIRCoeffs[nSOS][5])*(y));
             
             //Q2_5
-            y = ((IIRCoeffs_Q2_5[nSOS][0])*(x)) + (IIRv[nSOS]);
-            
-            y = (int16_t)(y >> 5);
-			
-			IIRv[nSOS] = ((IIRCoeffs_Q2_5[nSOS][1])*(x)) - ((IIRCoeffs_Q2_5[nSOS][4])*(y)) + (IIRu[nSOS]);
-            
-			IIRu[nSOS] = ((IIRCoeffs_Q2_5[nSOS][2])*(x)) - ((IIRCoeffs_Q2_5[nSOS][5])*(y));
-             
+//            y = ((IIRCoeffs_Q2_5[nSOS][0])*(x)) + (IIRv[nSOS]);
+//            
+//            y = (int16_t)(y >> 5);
+//			
+//			IIRv[nSOS] = ((IIRCoeffs_Q2_5[nSOS][1])*(x)) - ((IIRCoeffs_Q2_5[nSOS][4])*(y)) + (IIRu[nSOS]);
+//            
+//			IIRu[nSOS] = ((IIRCoeffs_Q2_5[nSOS][2])*(x)) - ((IIRCoeffs_Q2_5[nSOS][5])*(y));
+//             
             // Update the input for the next SOS section
             x = y;
         }
